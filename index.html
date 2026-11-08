@@ -527,7 +527,7 @@ const STANDALONE=!!window.__STANDALONE,PKEY='bibleplan2-profiles';
 function profs(){try{return JSON.parse(localStorage.getItem(PKEY)||'[]')||[]}catch(e){return[]}}
 function setProfs(a){try{localStorage.setItem(PKEY,JSON.stringify(a))}catch(e){}}
 // ▼ Supabase 설정: Supabase 대시보드 > Project Settings > API 에서 복사해 넣으세요 (anon public 키만! service_role 키는 절대 넣지 마세요)
-const SB_URL='',SB_KEY='';
+const SB_URL='https://mlzsvmpgwogpybriihwc.supabase.co',SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1senN2bXBnd29ncHlicmlpaHdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQxMjU0MjIsImV4cCI6MjEwOTcwMTQyMn0.hEUnG9GK_rWdds7JDjIpy07rPwgqkddIjL9E71V_W5Q';
 const CLOUD=STANDALONE&&/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(SB_URL)&&SB_KEY.length>20;
 const SB_REF=CLOUD?SB_URL.slice(8).split('.')[0]:'';
 function sbStoredUid(){if(!CLOUD)return'';try{const j=JSON.parse(localStorage.getItem('sb-'+SB_REF+'-auth-token')||'null');const u=j&&(j.user||(j.currentSession&&j.currentSession.user));return u&&/^[0-9a-f-]{36}$/.test(u.id)?u.id:''}catch(e){return''}}
@@ -957,11 +957,11 @@ function enter(id,keep){try{sessionStorage.setItem('bibleplan2-who',id);if(keep)
 function logout(){if(ME&&ME.cloud){cloudLogout();return}try{sessionStorage.removeItem('bibleplan2-who');localStorage.removeItem('bibleplan2-keep')}catch(e){}location.reload()}
 let gMode=null,gTarget=null;
 function gateList(){const L=document.getElementById('gList'),F=document.getElementById('gForm');gMode=null;F.hidden=true;L.hidden=false;L.innerHTML='';
-  const ps=profs();document.getElementById('gT').textContent=ps.length?'누가 읽나요?':'어서 오세요';
-  document.getElementById('gL').textContent=ps.length?'이름을 누르고 비밀번호를 넣어 주세요. 사람마다 기록이 따로 저장돼요.':'이 기기에서는 처음이에요. 새로 시작하거나, 다른 기기에서 쓰던 분은 기존 성도 로그인으로 백업을 불러와 주세요.';
+  const ps=profs();document.getElementById('gT').textContent=CLOUD?'어서 오세요':(ps.length?'누가 읽나요?':'어서 오세요');
+  document.getElementById('gL').textContent=CLOUD?'카카오나 이메일로 로그인하면 휴대폰과 PC에서 기록이 이어지고, 함께 읽기 모임에도 참여할 수 있어요.':(ps.length?'이름을 누르고 비밀번호를 넣어 주세요. 사람마다 기록이 따로 저장돼요.':'이 기기에서는 처음이에요. 새로 시작하거나, 다른 기기에서 쓰던 분은 기존 성도 로그인으로 백업을 불러와 주세요.');
   ps.forEach(p=>{const b=el('button','gp');b.type='button';b.append(el('span','av',p.name.slice(0,1)),el('b',null,p.name));b.addEventListener('click',()=>gateForm('login',p));L.append(b)});
   const a=el('button','gp add');a.type='button';a.append(el('span','av','+'),el('b',null,'새 사용자 추가'));a.addEventListener('click',()=>gateForm('new'));L.append(a);
-  const r=el('button','gp add');r.type='button';r.append(el('span','av','↺'),(()=>{const w=el('span','gtx');w.append(el('b',null,'기존 성도 로그인'),el('small',null,'다른 기기에서 내보낸 백업 파일로 내 기록을 불러와요'));return w})());
+  const r=el('button','gp add');r.type='button';r.append(el('span','av','↺'),(()=>{const w=el('span','gtx');w.append(el('b',null,CLOUD?'백업 파일로 불러오기':'기존 성도 로그인'),el('small',null,'다른 기기에서 내보낸 백업 파일로 내 기록을 불러와요'));return w})());
   r.addEventListener('click',()=>document.getElementById('gFile').click());L.append(r)}
 let gRestore=null;
 function cleanProfile(p){return p&&typeof p==='object'&&typeof p.name==='string'&&p.name.trim()&&typeof p.salt==='string'&&typeof p.hash==='string'&&typeof p.id==='string'&&/^[a-z0-9]{6,40}$/i.test(p.id)?{id:p.id,name:p.name.trim().slice(0,20),salt:p.salt.slice(0,64),hash:p.hash.slice(0,200)}:null}
