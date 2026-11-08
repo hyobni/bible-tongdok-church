@@ -296,10 +296,11 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .totop.on{opacity:1;transform:none;pointer-events:auto}
 @media (min-width:1024px){
   .wrap{max-width:1180px;display:grid;grid-template-columns:400px minmax(0,1fr);column-gap:48px;row-gap:24px;align-items:start;padding-inline:40px}
-  .acctbar,.topbar,.foot{grid-column:1/-1}
+  .acctbar,.topbar{grid-column:1/-1}
+  .colL{grid-column:1;grid-row:3/span 2}.colR{grid-column:2;grid-row:3}.foot{grid-column:2;grid-row:4;padding-bottom:24px}
   .acctbar{margin-bottom:-12px}
   .colL,.colR{display:flex;flex-direction:column;gap:32px;min-width:0}
-  .colL{position:sticky;top:24px;max-height:calc(100vh - 48px);overflow-y:auto;padding-bottom:8px;scrollbar-width:thin}
+  .colL{padding-bottom:120px}
   .hero{padding-top:8px}.hero h1{font-size:30px}
   .s-today .today{padding:32px}
   .cta{left:calc(max(0px,(100vw - 1180px)/2) + 488px);right:calc(max(0px,(100vw - 1180px)/2) + 40px);padding-left:0;padding-right:0}
@@ -1029,7 +1030,10 @@ function loadSB(){if(SB)return Promise.resolve(SB);return new Promise((res,rej)=
 const ERRK={invalid_code:'초대코드가 맞지 않아요. 다시 확인해 주세요.',group_full:'모임 인원이 가득 찼어요(최대 50명).',too_many_attempts:'시도가 너무 많아요. 잠시 뒤에 다시 해 주세요.',too_many_groups:'모임은 한 사람이 10개까지 만들 수 있어요.',not_member:'이 모임의 모임원이 아니에요.',name_required:'모임 이름을 적어 주세요.'};
 const errMsg=e=>{const m=(e&&(e.message||e.error_description||e.msg))||'';for(const k in ERRK)if(m.includes(k))return ERRK[k];
   if(/Invalid login credentials/i.test(m))return'이메일이나 비밀번호가 맞지 않아요.';if(/already registered|already exists/i.test(m))return'이미 가입된 이메일이에요. 로그인을 눌러 주세요.';
-  if(/Email not confirmed/i.test(m))return'메일함의 인증 링크를 먼저 눌러 주세요.';if(/rate limit/i.test(m))return'잠시 뒤에 다시 시도해 주세요.';return'잠시 문제가 생겼어요. 다시 시도해 주세요.'};
+  if(/Email not confirmed/i.test(m))return'메일함의 인증 링크를 먼저 눌러 주세요.';if(/rate limit/i.test(m))return'잠시 뒤에 다시 시도해 주세요.';
+  if(/schema cache|does not exist|PGRST20[25]|42P01|42883/i.test(m+' '+(e&&e.code||'')))return'서버 설정(SQL)이 아직 적용되지 않았어요. Supabase SQL Editor에서 설정문을 실행해 주세요. ('+((e&&e.code)||'')+')';
+  if(/permission denied|42501|row-level security/i.test(m+' '+(e&&e.code||'')))return'서버 권한 설정이 필요해요. 권한 설정문을 실행해 주세요. ('+((e&&e.code)||'')+')';
+  return'잠시 문제가 생겼어요. 다시 시도해 주세요.'+(m?' ('+String(m).slice(0,80)+')':'')};
 function pendingJoin(){try{return localStorage.getItem('bibleplan2-join')||''}catch(e){return''}}
 function setPendingJoin(c){try{c?localStorage.setItem('bibleplan2-join',c):localStorage.removeItem('bibleplan2-join')}catch(e){}}
 // 초대 링크(?join=CODE) 기억해 두기
