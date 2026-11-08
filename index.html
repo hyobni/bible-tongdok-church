@@ -229,6 +229,7 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .gp:hover{border-color:var(--blue)}
 .gp .av{flex:none;width:44px;height:44px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;font-weight:800;font-size:18px}
 .gp b{font-size:17px;font-weight:700}
+.gtx{display:flex;flex-direction:column;gap:2px;min-width:0}.gtx small{font-size:13px;color:var(--muted);font-weight:500}
 .gp.add .av{background:var(--surface);color:var(--sub);font-size:24px;font-weight:500}
 .gform{display:flex;flex-direction:column;gap:16px;margin-top:8px}
 .gform input:not([type=checkbox]){border:0;background:var(--surface);color:var(--fg);font:500 17px var(--font);padding:14px;border-radius:14px;width:100%}
@@ -338,6 +339,7 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
     <h1 id="gT">누가 읽나요?</h1>
     <p class="lead" id="gL">이 기기를 함께 쓰는 사람마다 기록이 따로 저장돼요.</p>
     <div class="glist" id="gList"></div>
+    <input type="file" id="gFile" accept=".json,application/json" hidden>
     <form class="gform" id="gForm" hidden autocomplete="off">
       <div class="fld" id="gNameF"><label for="gName">이름</label><input id="gName" maxlength="20" autocomplete="off"></div>
       <div class="fld"><label for="gPw">비밀번호</label><input id="gPw" type="password" inputmode="numeric" autocomplete="off"></div>
@@ -799,7 +801,7 @@ const _refresh=refresh;refresh=function(){_refresh();hrender()};
 let ACCT={on:false,name:''},DL=null;
 function drawAcct(){const a=document.getElementById('sAcct');if(!a)return;if(STANDALONE){drawLocalAcct(a);return}a.className='acct'+(ACCT.on?' on':'');a.innerHTML='';a.append(el('i'));
   a.append(el('span',null,ACCT.on?((ACCT.name?ACCT.name+'님, ':'')+'Claude 계정으로 로그인되어 있어요. 기록이 계정에 자동 저장돼서 다른 기기에서도 이어져요.'):'기록은 이 기기의 이 브라우저에 저장돼요. 다른 기기로 옮기거나 혹시 모를 때를 위해 가끔 백업을 내보내 두세요.'))}
-function dumpState(){return {v:1,at:Date.now(),done:[...done].sort((a,b)=>a-b),memos,habit:H}}
+function dumpState(){const o={v:1,at:Date.now(),done:[...done].sort((a,b)=>a-b),memos,habit:H};if(STANDALONE&&ME)o.profile={id:ME.id,name:ME.name,salt:ME.salt,hash:ME.hash};return o}
 const DRE=/^\d{4}-\d{2}-\d{2}$/,okKey=k=>typeof k==='string'&&/^\d{1,4}$/.test(k);
 function cleanState(x){if(!x||typeof x!=='object'||Array.isArray(x))return null;const o={};
   o.done=(Array.isArray(x.done)?x.done:[]).filter(n=>Number.isInteger(n)&&n>0&&n<=2000).slice(0,2000);
@@ -898,23 +900,36 @@ function enter(id,keep){try{sessionStorage.setItem('bibleplan2-who',id);if(keep)
 function logout(){try{sessionStorage.removeItem('bibleplan2-who');localStorage.removeItem('bibleplan2-keep')}catch(e){}location.reload()}
 let gMode=null,gTarget=null;
 function gateList(){const L=document.getElementById('gList'),F=document.getElementById('gForm');gMode=null;F.hidden=true;L.hidden=false;L.innerHTML='';
-  const ps=profs();document.getElementById('gT').textContent=ps.length?'누가 읽나요?':'처음 오셨네요';
-  document.getElementById('gL').textContent=ps.length?'이름을 누르고 비밀번호를 넣어 주세요. 사람마다 기록이 따로 저장돼요.':'이름과 비밀번호를 정하면 시작할 수 있어요. 이 기기를 함께 쓰는 사람마다 따로 만들 수 있어요.';
+  const ps=profs();document.getElementById('gT').textContent=ps.length?'누가 읽나요?':'어서 오세요';
+  document.getElementById('gL').textContent=ps.length?'이름을 누르고 비밀번호를 넣어 주세요. 사람마다 기록이 따로 저장돼요.':'이 기기에서는 처음이에요. 새로 시작하거나, 다른 기기에서 쓰던 분은 기존 성도 로그인으로 백업을 불러와 주세요.';
   ps.forEach(p=>{const b=el('button','gp');b.type='button';b.append(el('span','av',p.name.slice(0,1)),el('b',null,p.name));b.addEventListener('click',()=>gateForm('login',p));L.append(b)});
-  const a=el('button','gp add');a.type='button';a.append(el('span','av','+'),el('b',null,'새 사용자 추가'));a.addEventListener('click',()=>gateForm('new'));L.append(a)}
+  const a=el('button','gp add');a.type='button';a.append(el('span','av','+'),el('b',null,'새 사용자 추가'));a.addEventListener('click',()=>gateForm('new'));L.append(a);
+  const r=el('button','gp add');r.type='button';r.append(el('span','av','↺'),(()=>{const w=el('span','gtx');w.append(el('b',null,'기존 성도 로그인'),el('small',null,'다른 기기에서 내보낸 백업 파일로 내 기록을 불러와요'));return w})());
+  r.addEventListener('click',()=>document.getElementById('gFile').click());L.append(r)}
+let gRestore=null;
+function cleanProfile(p){return p&&typeof p==='object'&&typeof p.name==='string'&&p.name.trim()&&typeof p.salt==='string'&&typeof p.hash==='string'&&typeof p.id==='string'&&/^[a-z0-9]{6,40}$/i.test(p.id)?{id:p.id,name:p.name.trim().slice(0,20),salt:p.salt.slice(0,64),hash:p.hash.slice(0,200)}:null}
+async function gateFile(f){const err=document.getElementById('gErr');let x=null;try{x=JSON.parse(await f.text())}catch(e){}
+  const st=cleanState(x);if(!st){gateList();const L=document.getElementById('gL');L.textContent='백업 파일을 읽지 못했어요. 이 앱의 개인 설정에서 내보낸 .json 파일인지 확인해 주세요.';return}
+  const pf=cleanProfile(x.profile);gRestore={data:x,profile:pf};
+  if(pf){gateForm('restore',pf);document.getElementById('gT').textContent=pf.name+' 성도님';document.getElementById('gL').textContent='백업을 만든 기기에서 쓰던 비밀번호를 넣어 주세요. 읽은 날 '+st.done.length+'일과 메모를 이 기기로 불러와요.';document.getElementById('gForgot').hidden=true}
+  else{gateForm('new');gMode='restoreNew';document.getElementById('gT').textContent='기록 불러오기';document.getElementById('gL').textContent='이 백업에는 이름이 없어요. 이 기기에서 쓸 이름과 비밀번호를 정하면 읽은 날 '+st.done.length+'일을 불러와요.'}}
+function stashImport(){try{sessionStorage.setItem('bibleplan2-import',JSON.stringify(gRestore.data))}catch(e){}}
 function gateForm(mode,p){gMode=mode;gTarget=p||null;document.getElementById('gList').hidden=true;const F=document.getElementById('gForm');F.hidden=false;F.reset();
   document.getElementById('gErr').textContent='';const isNew=mode==='new';document.getElementById('gNameF').hidden=!isNew;document.getElementById('gPw2F').hidden=!isNew;
   document.getElementById('gForgot').hidden=isNew;document.getElementById('gT').textContent=isNew?'새 사용자':p.name+'님';
   document.getElementById('gL').textContent=isNew?'비밀번호는 4자 이상으로 정해 주세요. 잊으면 찾을 수 없어요.':'비밀번호를 넣어 주세요.';
   document.getElementById('gGo').textContent=isNew?'만들고 시작하기':'들어가기';setTimeout(()=>document.getElementById(isNew?'gName':'gPw').focus(),30)}
 async function gateSubmit(e){e.preventDefault();const err=document.getElementById('gErr'),pw=document.getElementById('gPw').value,keep=document.getElementById('gKeep').checked;
+  if(gMode==='restore'){const pf=gRestore.profile;if(!(await pwCheck(pf,pw))){err.textContent='비밀번호가 맞지 않아요. 백업을 만든 기기의 비밀번호를 넣어 주세요.';return}
+    const ps=profs();let me=ps.find(x=>x.id===pf.id);if(!me){let nm=pf.name;if(ps.some(x=>x.name===nm))nm=nm+' (2)';me={id:pf.id,name:nm,salt:pf.salt,hash:pf.hash,at:Date.now()};ps.push(me)}
+    if(!me.hash.startsWith('p2$')){me.salt=rid();me.hash=await pwHash2(pw,me.salt)}setProfs(ps);stashImport();enter(me.id,keep);return}
   if(gMode==='login'){if(!(await pwCheck(gTarget,pw))){err.textContent='비밀번호가 맞지 않아요.';return}if(!gTarget.hash.startsWith('p2$')){const ps=profs(),me=ps.find(x=>x.id===gTarget.id);if(me){me.salt=rid();me.hash=await pwHash2(pw,me.salt);setProfs(ps)}}enter(gTarget.id,keep);return}
   const name=document.getElementById('gName').value.trim(),pw2=document.getElementById('gPw2').value,ps=profs();
   if(!name){err.textContent='이름을 적어 주세요.';return}if(ps.some(p=>p.name===name)){err.textContent='같은 이름이 이미 있어요.';return}
   if(pw.length<4){err.textContent='비밀번호는 4자 이상이어야 해요.';return}if(pw!==pw2){err.textContent='비밀번호 확인이 달라요.';return}
   const id=rid(),salt=rid();const p={id,name,salt,hash:await pwHash2(pw,salt),at:Date.now()};
   if(!ps.length){try{['bibleplan2-done','bibleplan2-memos','bibleplan2-habit','bibleplan2-view','bibleplan2-today'].forEach(k=>{const v=localStorage.getItem(k);if(v!=null)localStorage.setItem(k+'@'+id,v)})}catch(e){}}
-  ps.push(p);setProfs(ps);enter(id,keep)}
+  ps.push(p);setProfs(ps);if(gMode==='restoreNew'&&gRestore)stashImport();enter(id,keep)}
 function gateForgot(){const err=document.getElementById('gErr');
   err.textContent='비밀번호는 이 기기 안에만 있어서 찾을 수 없어요. 기록을 지우고 다시 만들려면 아래에 이름을 똑같이 적고 한 번 더 누르세요.';
   const f=document.getElementById('gNameF');f.hidden=false;document.querySelector('#gNameF label').textContent='지울 사용자 이름';
@@ -941,9 +956,9 @@ document.getElementById('acctOut').addEventListener('click',logout);
   t.addEventListener('click',()=>window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}))})();
 if(!GATED)drawTopAcct();
 if(GATED){document.querySelector('.wrap').hidden=true;document.getElementById('cta').hidden=true;document.getElementById('gate').hidden=false;
-  document.getElementById('gForm').addEventListener('submit',gateSubmit);document.getElementById('gBack').addEventListener('click',gateList);
+  document.getElementById('gForm').addEventListener('submit',gateSubmit);const gf=document.getElementById('gFile');gf.addEventListener('change',()=>{const f=gf.files[0];gf.value='';if(f)gateFile(f)});document.getElementById('gBack').addEventListener('click',gateList);
   document.getElementById('gForgot').addEventListener('click',()=>{if(!document.getElementById('gForgot').onclick)gateForgot()});gateList()}
-if(!GATED){hload();setPlan(H.set.plan);resched();load();mload();applySeed();resched();build();try{if(localStorage.getItem(NS('bibleplan2-view'))==='cal')setView('cal')}catch(e){}}
+if(!GATED){hload();setPlan(H.set.plan);resched();load();mload();applySeed();try{const pi=sessionStorage.getItem('bibleplan2-import');if(pi){sessionStorage.removeItem('bibleplan2-import');applyState(JSON.parse(pi));save();hsave()}}catch(e){}resched();build();try{if(localStorage.getItem(NS('bibleplan2-view'))==='cal')setView('cal')}catch(e){}}
 (()=>{const w=document.getElementById('tWrap'),tl=document.getElementById('tTl');try{if(localStorage.getItem(NS('bibleplan2-today'))==='0')w.open=false}catch(e){}
   const u=()=>{tl.textContent=w.open?'접기':'펼치기'};u();w.addEventListener('toggle',()=>{u();try{localStorage.setItem(NS('bibleplan2-today'),w.open?'1':'0')}catch(e){}})})();
 var IDX=[],BOOKS=[],BMAX={};
