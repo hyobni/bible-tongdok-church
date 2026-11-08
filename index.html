@@ -7,14 +7,15 @@
 :root{
   --bg:#FFFFFF; --surface:#F2F4F6; --card:#FFFFFF; --fg:#191F28; --sub:#4E5968; --muted:#8B95A1; --line:#E5E8EB;
   --blue:#3182F6; --blue-soft:#E8F3FF; --on-blue:#FFFFFF; --shadow:0 2px 16px rgba(0,27,55,.06);
+  --gold-soft:#FFF8E5; --gold-line:#F3D58A; --gold-ink:#7A5200; --gold-strong:#B07400; --pink-soft:#FFF0F2; --pink-ink:#E5484D;
   --font:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#17171C; --surface:#202027; --card:#26262E; --fg:#F2F4F6; --sub:#C3C8CF; --muted:#8B95A1; --line:#33333D;
-  --blue:#4D9BFF; --blue-soft:#1C2A40; --on-blue:#FFFFFF; --shadow:none; color-scheme:dark}}
+  --blue:#4D9BFF; --blue-soft:#1C2A40; --on-blue:#FFFFFF; --shadow:none; --gold-soft:#3A2F12; --gold-line:#6B5520; --gold-ink:#FFD36B; --gold-strong:#FFC93C; --pink-soft:#3A1F26; --pink-ink:#FF8A98; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#17171C; --surface:#202027; --card:#26262E; --fg:#F2F4F6; --sub:#C3C8CF; --muted:#8B95A1; --line:#33333D;
-  --blue:#4D9BFF; --blue-soft:#1C2A40; --on-blue:#FFFFFF; --shadow:none; color-scheme:dark}
+  --blue:#4D9BFF; --blue-soft:#1C2A40; --on-blue:#FFFFFF; --shadow:none; --gold-soft:#3A2F12; --gold-line:#6B5520; --gold-ink:#FFD36B; --gold-strong:#FFC93C; --pink-soft:#3A1F26; --pink-ink:#FF8A98; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
@@ -262,7 +263,7 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .ovc{display:flex;flex-wrap:wrap;gap:4px}
 .oc{border:0;font:700 12px var(--font);padding:4px 7px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:baseline;gap:3px;line-height:1.2}
 .oc small{font-size:9px;font-weight:600;opacity:.7}
-.oc.ot{background:#FFF3DE;color:#9A5B00}.oc.nt{background:var(--blue-soft);color:var(--blue)}
+.oc.ot{background:var(--gold-soft);color:var(--gold-ink)}.oc.nt{background:var(--blue-soft);color:var(--blue)}
 .oc.cur{outline:2px solid var(--fg);outline-offset:1px}
 .ovlg{display:inline-flex;align-items:center;gap:5px}.ovlg i{width:9px;height:9px;border-radius:3px;display:inline-block;margin-left:6px}.ovlg i.ot{background:#FFB547}.ovlg i.nt{background:var(--blue)}
 .ovt{margin:0;font-size:12px;color:var(--muted)}
@@ -274,7 +275,7 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .orr{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:12px;padding:10px 12px;cursor:pointer;font:inherit;text-align:left}
 .orr:hover{border-color:var(--blue)}.orr .nm{flex:1;font-weight:700}.orr .ow{font-size:12px;color:var(--muted)}
 .bdg{flex:none;font-size:11px;font-weight:700;border-radius:6px;padding:2px 6px}
-.bdg.ot{background:#FFF3DE;color:#9A5B00}.bdg.nt{background:var(--blue-soft);color:var(--blue)}
+.bdg.ot{background:var(--gold-soft);color:var(--gold-ink)}.bdg.nt{background:var(--blue-soft);color:var(--blue)}
 .ord li .dh{flex:none;color:var(--muted);cursor:grab;touch-action:none;display:grid;place-items:center;width:28px;height:34px;margin-left:-6px;border-radius:8px}
 .ord li .dh:active{cursor:grabbing}
 .ord li .oc2{font-size:12px;color:var(--muted);min-width:34px;text-align:right}
@@ -353,12 +354,12 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .inbox b{background:#F04452;color:#fff;font-size:11px;min-width:18px;height:18px;border-radius:99px;display:grid;place-items:center;padding:0 5px}
 .mb .acts{grid-column:2/4;display:flex;gap:6px;margin-top:4px}
 .mb .acts button{border:0;font:700 13px var(--font);padding:7px 12px;border-radius:99px;cursor:pointer}
-.mb .acts .ex{background:var(--blue-soft);color:var(--blue)}.mb .acts .lv{background:#FFE9EC;color:#E5484D}
+.mb .acts .ex{background:var(--blue-soft);color:var(--blue)}.mb .acts .lv{background:var(--pink-soft);color:var(--pink-ink)}
 .chips{display:flex;flex-direction:column;gap:8px}
 .chips button{border:1px solid var(--line);background:var(--card);color:var(--fg);font:500 15px/1.5 var(--font);text-align:left;padding:12px 14px;border-radius:14px;cursor:pointer}
 .chips button[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft)}
 .chm{border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
-.chm.exhort{background:var(--blue-soft)}.chm.love{background:#FFF0F2}
+.chm.exhort{background:var(--blue-soft)}.chm.love{background:var(--pink-soft)}
 .chm .hd{font-size:13px;font-weight:700;color:var(--sub)}.chm .tx{font-size:16px;line-height:1.6}.chm .tm{font-size:12px;color:var(--muted)}
 .chm.new .hd:after{content:"새로 옴";margin-left:6px;color:#F04452}
 .jumps{display:flex;flex-direction:column;gap:8px}
@@ -370,11 +371,11 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .sw input{width:20px;height:20px;accent-color:var(--blue)}
 .ptime{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;color:var(--sub);padding-left:30px}
 .ptime input{border:0;background:var(--card);color:var(--fg);font:600 16px var(--font);padding:8px 10px;border-radius:10px}
-.coin{display:inline-flex;align-items:center;gap:5px;border:1px solid #F3D58A;background:#FFF8E5;color:#7A5200;font:700 13px var(--font);padding:5px 12px 5px 8px;border-radius:99px;cursor:pointer}
+.coin{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--gold-line);background:var(--gold-soft);color:var(--gold-ink);font:700 13px var(--font);padding:5px 12px 5px 8px;border-radius:99px;cursor:pointer}
 .coin b{font-size:15px;font-weight:800}.coin span{font-weight:600}
 .acctbar .inbox{margin-right:0}.acctbar .nm{margin-left:auto}
-.greet{background:linear-gradient(135deg,#FFF8E5,#FFFFFF);border:1px solid #F3D58A;border-radius:18px;padding:16px 18px;font-size:16px;line-height:1.6;display:flex;gap:12px;align-items:center}
-.greet b{color:#B07400}
+.greet{background:var(--gold-soft);color:var(--fg);border:1px solid var(--gold-line);border-radius:18px;padding:16px 18px;font-size:16px;line-height:1.6;display:flex;gap:12px;align-items:center}
+.greet b{color:var(--gold-strong)}
 .vtabs{overflow-x:auto;max-width:100%;scrollbar-width:none}.vtabs button{white-space:nowrap}
 .fig,.rng{background:var(--surface);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px}
 .fcur{background:var(--card);border-radius:18px;padding:18px;display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
@@ -384,7 +385,7 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .fstat div{background:var(--card);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:2px}.fstat span{font-size:12px;color:var(--muted)}.fstat b{font-size:18px}
 .orch{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
 .tree{background:var(--card);border-radius:14px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--muted)}
-.tree.ready{outline:2px solid #F5B428;color:#7A5200;font-weight:700}
+.tree.ready{outline:2px solid #F5B428;color:var(--gold-ink);font-weight:700}
 .harv{background:#F5B428;color:#3D2A00;border:0;font:800 16px var(--font);padding:14px;border-radius:14px;cursor:pointer}
 .rsum{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .rsum div{background:var(--card);border-radius:14px;padding:12px 14px}.rsum span{font-size:12px;color:var(--muted);display:block}.rsum b{font-size:18px}
@@ -406,6 +407,25 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .enc .er{font-size:13px;color:var(--muted);font-weight:700;margin-top:-4px}
 .enc .b2{width:100%}
 .rq{background:var(--surface);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}.rq .rd{font-size:13px;color:var(--blue);font-weight:700}.rq b{font-size:20px}
+.shd{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:-24px;background:var(--card);margin:-24px -20px 0;padding:20px 16px 8px 20px;z-index:2}
+.xbtn{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--surface);color:var(--sub);display:grid;place-items:center;cursor:pointer}
+.xbtn:hover{color:var(--fg)}
+.hbar{display:flex;align-items:center;gap:8px;margin-bottom:-24px}
+.hbar .hr{margin-left:auto;display:flex;align-items:center;gap:6px}
+.ib{position:relative;width:42px;height:42px;border-radius:50%;border:0;background:var(--surface);color:var(--sub);display:grid;place-items:center;cursor:pointer;padding:0}
+.ib:hover{color:var(--fg)}
+.ib.inbox b{position:absolute;top:-2px;right:-2px;background:#F04452;color:#fff;font-size:11px;min-width:18px;height:18px;border-radius:99px;display:grid;place-items:center;padding:0 5px;border:2px solid var(--bg)}
+.avatar{width:42px;height:42px;border-radius:50%;border:0;background:var(--blue);color:#fff;font:800 16px var(--font);cursor:pointer}
+.pm{position:relative}
+.pmenu{position:absolute;right:0;top:50px;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:6px;z-index:20;display:flex;flex-direction:column}
+.pmenu[hidden]{display:none}
+.pmh{padding:10px 12px 8px;border-bottom:1px solid var(--line);margin-bottom:4px;font-size:15px}
+.pmenu button{border:0;background:none;color:var(--fg);font:600 15px var(--font);text-align:left;padding:11px 12px;border-radius:10px;cursor:pointer}
+.pmenu button:hover{background:var(--surface)}.pmenu .danger{color:var(--pink-ink)}
+.topbar{display:block}.topbar .streak{display:flex;width:100%;justify-content:flex-start}
+.coin{white-space:nowrap}
+@media (max-width:380px){.coin span{display:none}}
+.fld input[type=date]{display:block;max-width:100%;min-width:0;-webkit-appearance:none;appearance:none;text-align:left}
 .ferr{color:#E5484D;font-size:13px;margin:0;min-height:0}
 .memo{display:flex;flex-direction:column;gap:6px}
 .memo textarea{width:100%;min-height:96px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--fg);font:15px/1.7 var(--font);padding:12px 14px}
@@ -447,10 +467,17 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
   </div>
 </div>
 <div class="wrap">
-  <div class="acctbar" id="acctBar"><button class="coin" id="coinBtn" type="button" aria-label="데나리온, 무화과나무 보기"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#F5B428"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="#C98A0B" stroke-width="1.6"/><path d="M12 7.5v9M9.6 9.6c0-1 1-1.6 2.4-1.6s2.4.6 2.4 1.5c0 2.4-4.8 1.4-4.8 3.9 0 1 1 1.6 2.4 1.6s2.4-.6 2.4-1.6" fill="none" stroke="#7A5200" stroke-width="1.4" stroke-linecap="round"/></svg><b id="coinN">0</b><span>데나리온</span></button><button class="inbox" id="inboxBtn" type="button" hidden aria-label="받은 마음"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H5.2L4 17.2z"/><path d="M8 9h8M8 12h5"/></svg><span>받은 마음</span><b id="inboxN" hidden>0</b></button><span class="nm" id="acctNm"></span><button class="out" id="acctOut" type="button" hidden>로그아웃</button></div>
+  <header class="hbar" id="acctBar">
+    <button class="coin" id="coinBtn" type="button" aria-label="데나리온, 무화과나무 보기"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#F5B428"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="#C98A0B" stroke-width="1.6"/><path d="M12 7.5v9M9.6 9.6c0-1 1-1.6 2.4-1.6s2.4.6 2.4 1.5c0 2.4-4.8 1.4-4.8 3.9 0 1 1 1.6 2.4 1.6s2.4-.6 2.4-1.6" fill="none" stroke="#7A5200" stroke-width="1.4" stroke-linecap="round"/></svg><b id="coinN">0</b><span>데나리온</span></button>
+    <div class="hr">
+      <button class="ib inbox" id="inboxBtn" type="button" hidden aria-label="받은 마음"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H5.2L4 17.2z"/><path d="M8 9h8M8 12h5"/></svg><b id="inboxN" hidden>0</b></button>
+      <button class="ib" id="openSet" type="button" aria-label="개인 설정"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+      <div class="pm"><button class="avatar" id="avBtn" type="button" aria-haspopup="menu" aria-expanded="false" hidden><span id="avTx"></span></button>
+        <div class="pmenu" id="pMenu" role="menu" hidden><div class="pmh"><b id="acctNm"></b></div><button type="button" role="menuitem" id="pmSet">개인 설정</button><button type="button" role="menuitem" id="pmInbox">받은 마음</button><button type="button" role="menuitem" class="danger" id="acctOut" hidden>로그아웃</button></div></div>
+    </div>
+  </header>
   <div class="topbar">
     <span class="streak" id="streak"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c.6 3.2-1 5-2.6 6.8C7.8 10.6 6 12.6 6 15.5A6 6 0 0 0 18 15.5c0-2.4-1.1-4.2-2.3-5.6-.3 1.4-1 2.5-2.2 3 .4-3.6-.4-7.6-1.5-10.9z"/></svg><span id="stTx"></span></span>
-    <button class="gear" id="openSet" type="button" aria-label="개인 설정"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span class="gl">개인 설정</span></button>
   </div>
   <div class="colL">
   <section class="hero">
@@ -529,7 +556,7 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
   <p class="foot">체크한 기록은 이 페이지에 저장돼요. 하루 밀려도 괜찮아요. 날짜 대신 일차로만 세요.<br>모든 날에 해설이 들어 있어요. 개혁주의 관점으로 썼어요. 함께 읽을 책은 권·장 단위로 위치를 적었어요(판본마다 쪽수가 달라서). '책 속 한 구절'은 저작권이 끝난 고전(칼빈, 어거스틴, 루터, 오웬, 번연, 에드워즈 등)을 직접 번역했고, 교리문답은 웨스트민스터·하이델베르크·도르트 원문을 옮겼어요. 메모는 나만 볼 수 있어요.<br>자비는 처음에 3개가 있고, 7일 연속으로 읽을 때마다 1개씩 더 생겨요. 빈 날을 누르면 자비로 채울 수 있어요.</p>
 </div>
 <dialog class="sheet" id="setDlg" aria-labelledby="setT"><div class="sin">
-  <h3 id="setT">개인 설정</h3>
+  <div class="shd"><h3 id="setT">개인 설정</h3><button class="xbtn" id="sX" type="button" aria-label="개인 설정 닫기" autofocus><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="greet" id="greet"></div>
   <div class="fld"><label for="sStart">읽기 시작한 날</label><input type="date" id="sStart"></div>
   <div class="fld"><span class="fl">읽는 방식</span>
@@ -909,7 +936,7 @@ function hrender(){try{coinRender();if(view==='fig')figRender();if(view==='rng')
 // 설정 시트
 let draft=null;
 function openSet(){draft=JSON.parse(JSON.stringify(H.set));draft.plan=normPlan(draft.plan||CURP);document.getElementById('sStart').value=draft.start;document.getElementById('sErr').textContent='';drawSet();
-  const d=document.getElementById('setDlg');if(d.showModal)d.showModal();else d.setAttribute('open','')}
+  const d=document.getElementById('setDlg');if(d.showModal)d.showModal();else d.setAttribute('open','');const x=document.getElementById('sX');if(x)x.focus({preventScroll:true});d.querySelector('.sin').scrollTop=0}
 function drawPlanUI(){const p=draft.plan;const M=document.getElementById('sMode');M.innerHTML='';
   [['flow','흐름 따라'],['canon','성경 순서대로'],['custom','내 맘대로']].forEach(([k,t])=>{const b=el('button',null,t);b.type='button';b.setAttribute('role','radio');b.setAttribute('aria-checked',p.mode===k);
     b.addEventListener('click',()=>{p.mode=k;if(k==='custom'&&!p.order)p.order=FLOW_ORDER.slice();draft.plan=normPlan(p);drawSet()});M.append(b)});
@@ -988,6 +1015,7 @@ function drawSet(){const _ol=document.querySelector('#sOrd ol'),_st=_ol?_ol.scro
   document.getElementById('sStart').addEventListener('change',e=>{if(e.target.value){draft.start=e.target.value;drawSet()}});
   document.getElementById('sOffAdd').addEventListener('click',()=>{const v=document.getElementById('sOff').value;if(v&&!draft.off.includes(v)){draft.off.push(v);document.getElementById('sOff').value='';drawSet()}});
   document.getElementById('nMinus').addEventListener('click',()=>{draft.plan.n=Math.max(1,draft.plan.n-1);drawSet()});document.getElementById('nPlus').addEventListener('click',()=>{draft.plan.n=Math.min(5,draft.plan.n+1);drawSet()});
+  document.getElementById('sX').addEventListener('click',()=>closeDlg(document.getElementById('setDlg')));
   document.getElementById('sCancel').addEventListener('click',()=>closeDlg(document.getElementById('setDlg')));
   document.getElementById('sSave').addEventListener('click',()=>{const err=document.getElementById('sErr');if(!draft.wd.some(Boolean)){err.textContent='읽는 요일을 하루 이상 골라 주세요.';return}if(!draft.start){err.textContent='시작 날짜를 골라 주세요.';return}
     draft.at=Date.now();const np=normPlan(draft.plan);draft.plan=np;H.set=draft;switchPlan(np);resched();hsave();closeDlg(document.getElementById('setDlg'));hrender()});
@@ -1149,10 +1177,16 @@ function drawLocalAcct(a){a.className='acct on';a.innerHTML='';a.append(el('i'))
         w.append(i1,i2,ok);bt.after(w)}});
     bt.append(o,c);a.after(bt)}}
 if(STANDALONE){const sn=document.getElementById('bSnap');if(sn)sn.hidden=true}
-function drawTopAcct(){const bar=document.getElementById('acctBar'),nm=document.getElementById('acctNm'),out=document.getElementById('acctOut');
-  const name=STANDALONE?(ME&&ME.name):ACCT.name;nm.innerHTML='';if(name){nm.append(el('b',null,name),document.createTextNode(' 성도'))}
-  out.hidden=!(STANDALONE&&ME);bar.hidden=false}
+function drawTopAcct(){const nm=document.getElementById('acctNm'),out=document.getElementById('acctOut'),av=document.getElementById('avBtn');
+  const name=STANDALONE?(ME&&ME.name):ACCT.name;nm.textContent=name?name+' 성도':'';out.hidden=!(STANDALONE&&ME);av.hidden=!name&&out.hidden;document.getElementById('avTx').textContent=(name||'나').slice(0,1);
+  document.getElementById('pmInbox').hidden=document.getElementById('inboxBtn').hidden}
 document.getElementById('acctOut').addEventListener('click',logout);
+(()=>{const av=document.getElementById('avBtn'),pm=document.getElementById('pMenu');const close=()=>{pm.hidden=true;av.setAttribute('aria-expanded','false')};
+  av.addEventListener('click',e=>{e.stopPropagation();pm.hidden=!pm.hidden;av.setAttribute('aria-expanded',String(!pm.hidden));document.getElementById('pmInbox').hidden=document.getElementById('inboxBtn').hidden});
+  document.addEventListener('click',e=>{if(!pm.hidden&&!pm.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  document.getElementById('pmSet').addEventListener('click',()=>{close();document.getElementById('openSet').click()});
+  document.getElementById('pmInbox').addEventListener('click',()=>{close();document.getElementById('inboxBtn').click()})})();
+
 (()=>{const t=document.getElementById('toTop');const u=()=>t.classList.toggle('on',scrollY>600);addEventListener('scroll',u,{passive:true});u();
   t.addEventListener('click',()=>window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}))})();
 if(!GATED)drawTopAcct();
