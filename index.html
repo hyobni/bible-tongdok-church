@@ -297,7 +297,7 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .totop.on{opacity:1;transform:none;pointer-events:auto}
 @media (min-width:1024px){
   .wrap{max-width:1180px;display:grid;grid-template-columns:400px minmax(0,1fr);column-gap:48px;row-gap:24px;align-items:start;padding-inline:40px}
-  .acctbar,.topbar{grid-column:1/-1}
+  .acctbar,.topbar,.hbar{grid-column:1/-1}
   .colL{grid-column:1;grid-row:3/span 2}.colR{grid-column:2;grid-row:3}.foot{grid-column:2;grid-row:4;padding-bottom:24px}
   .acctbar{margin-bottom:-12px}
   .colL,.colR{display:flex;flex-direction:column;gap:32px;min-width:0}
@@ -331,6 +331,21 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .emailb{height:52px;font-size:16px}
 .gor{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin-top:10px}.gor:before,.gor:after{content:"";flex:1;height:1px;background:var(--line)}
 .ginv{margin:0;background:var(--blue-soft);color:var(--blue);font-weight:700;font-size:14px;border-radius:12px;padding:12px 14px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gtabs{display:flex;background:var(--surface);border-radius:14px;padding:4px;gap:4px}
+.gtabs button{flex:1;position:relative;border:0;background:none;color:var(--sub);font:700 15px var(--font);padding:11px 8px;border-radius:11px;cursor:pointer}
+.gtabs button[aria-selected="true"]{background:var(--card);color:var(--fg);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.gtabs i{position:absolute;top:7px;right:10px;width:8px;height:8px;border-radius:50%;background:#F04452}
+.gpane{display:flex;flex-direction:column;gap:14px}.gpane[hidden]{display:none}
+.frs{display:flex;gap:8px}.frs input{flex:1;min-width:0;border:0;background:var(--surface);color:var(--fg);font:600 16px var(--font);padding:13px 14px;border-radius:14px}
+.frs button{flex:none}
+.fr{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.fr:last-child{border-bottom:0}
+.fr .av{width:40px;height:40px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;font-weight:800;flex:none}
+.fr .fx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.fr .fx b{font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fr .fx small{font-size:13px;color:var(--muted)}
+.fr .fa{display:flex;gap:6px;flex:none}.fr .fa button{border:0;font:700 13px var(--font);padding:8px 12px;border-radius:99px;cursor:pointer;background:var(--surface);color:var(--fg)}
+.fr .fa .pri{background:var(--blue);color:var(--on-blue,#fff)}.fr .fa .tag{background:none;color:var(--muted);cursor:default;padding:8px 4px}
+.frl h4{margin:4px 0 0;font-size:15px;color:var(--sub)}
+.mb .acts .cut{background:none;color:var(--muted);margin-left:auto}
 .grp{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow);order:3}
 .glst{display:flex;flex-direction:column;gap:8px}
 .gi{display:flex;align-items:center;gap:12px;border:0;background:var(--surface);border-radius:16px;padding:14px 16px;cursor:pointer;font:inherit;color:var(--fg);text-align:left;width:100%}
@@ -412,18 +427,58 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .xbtn:hover{color:var(--fg)}
 .hbar{display:flex;align-items:center;gap:8px;margin-bottom:-24px}
 .hbar .hr{margin-left:auto;display:flex;align-items:center;gap:6px}
-.ib{position:relative;width:42px;height:42px;border-radius:50%;border:0;background:var(--surface);color:var(--sub);display:grid;place-items:center;cursor:pointer;padding:0}
+.ib{position:relative;flex:none;width:42px;height:42px;border-radius:50%;border:0;background:var(--surface);color:var(--sub);display:grid;place-items:center;cursor:pointer;padding:0}
 .ib:hover{color:var(--fg)}
 .ib.inbox b{position:absolute;top:-2px;right:-2px;background:#F04452;color:#fff;font-size:11px;min-width:18px;height:18px;border-radius:99px;display:grid;place-items:center;padding:0 5px;border:2px solid var(--bg)}
 .ib.sprout{background:#E8F7EC;color:#2E9A55}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ib.sprout{background:#173A25}}
 :root[data-theme="dark"] .ib.sprout{background:#173A25}
-.ib.sprout i{position:absolute;top:3px;right:3px;width:9px;height:9px;border-radius:50%;background:#F04452;border:2px solid var(--bg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ib.hand{background:#3A2614}}
+:root[data-theme="dark"] .ib.hand{background:#3A2614}
+.fpin>.gtabs{margin-bottom:16px}
+.prh{background:linear-gradient(160deg,#E8F7EC,#F4FBF6);border-radius:20px;padding:18px;display:flex;gap:14px;align-items:center;color:#14361F}
+.prh h3{margin:0 0 4px;font-size:18px}.prh p{margin:0;font-size:14px;line-height:1.6;color:#2F5A3C}.prh svg{flex:none}
+.pc{background:var(--surface);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.pc .ph{display:flex;align-items:center;gap:10px}.pc .ph .av{width:34px;height:34px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;font-weight:800;flex:none}
+.pc .ph b{font-size:15px}.pc .ph small{color:var(--muted);font-size:12.5px}.pc .ph .mm{margin-left:auto;border:0;background:none;color:var(--muted);font:700 13px var(--font);padding:6px 8px;border-radius:10px;cursor:pointer}
+.pc .ph .mm.armed{color:#E5484D}
+.pc>p{margin:0;font-size:16px;line-height:1.7;white-space:pre-wrap;word-break:break-word;color:var(--fg)}
+.pc .pa{display:flex;gap:8px}.pc .pa button{flex:1;border:0;border-radius:12px;padding:11px 8px;font:700 14px var(--font);cursor:pointer;background:var(--card);color:var(--fg)}
+.pc .pa .pray[aria-pressed="true"]{background:#E8F7EC;color:#1E7A3D}
+.pc .pcm{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:10px}.pc .pcm[hidden]{display:none}
+.pc .cm1{font-size:14px;line-height:1.6}.pc .cm1 b{margin-right:6px}.pc .cm1 small{color:var(--muted);margin-left:6px}.pc .cm1 button{border:0;background:none;color:var(--muted);font:600 12px var(--font);cursor:pointer;padding:0 4px}
+.pc form{display:flex;gap:6px}.pc form input{flex:1;min-width:0;border:0;background:var(--card);color:var(--fg);font:500 15px var(--font);padding:11px 12px;border-radius:12px}
+.pc form button{border:0;background:var(--blue);color:var(--on-blue,#fff);font:700 14px var(--font);padding:0 14px;border-radius:12px;cursor:pointer}
+.prmore{border:0;background:var(--surface);color:var(--fg);font:700 15px var(--font);padding:13px;border-radius:14px;cursor:pointer}
+.anon{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--fg)}.anon input{width:20px;height:20px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .prh{background:linear-gradient(160deg,#16301F,#1C2A21);color:#DDF3E3}:root:not([data-theme="light"]) .prh p{color:#B5D8BF}:root:not([data-theme="light"]) .pc .pa .pray[aria-pressed="true"]{background:#173A25;color:#8FE0A6}}
+:root[data-theme="dark"] .prh{background:linear-gradient(160deg,#16301F,#1C2A21);color:#DDF3E3}:root[data-theme="dark"] .prh p{color:#B5D8BF}
+.frp{gap:16px}
+.fpage .grp{background:none;border:0;box-shadow:none;padding:0;border-radius:0}.fpage .grp .glst .gi{background:var(--surface)}
+.gtabs button{white-space:nowrap}.frp>.frl,.frp>form{background:var(--surface);border-radius:18px;padding:6px 16px}.frp>form{padding:8px}.frp>.frl:empty{display:none}.frp>h4{margin:6px 0 -6px;font-size:16px}.frp .frs input{background:var(--card)}
+@media (max-width:380px){.ib,.avatar{width:35px!important;height:35px!important}.avatar svg{width:35px;height:35px}.hr{gap:5px!important}}
+.ib.hand{background:#FFF1E2}
+.ib.hand i,.ib.sprout i{position:absolute;top:3px;right:3px;width:9px;height:9px;border-radius:50%;background:#F04452;border:2px solid var(--bg)}
 .fpage{position:fixed;inset:0;z-index:60;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
 .fpin{max-width:720px;margin:0 auto;padding:12px 16px 48px}
 .fphd{position:sticky;top:0;z-index:2;background:var(--bg);display:flex;align-items:center;gap:8px;padding:6px 0 12px}
 .fphd h2{margin:0;font-size:20px;font-weight:800;color:var(--fg)}
-.fpage .fig{display:block}
+.fpage .s-sched{margin:0}.fpage .s-sched .shead{margin-bottom:12px}
+.den{display:flex;flex-direction:column;gap:14px}
+.dbal{background:var(--gold-soft);border:1px solid var(--gold-line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.dbal span{font-size:14px;color:var(--sub)}.dbal b{font-size:30px;font-weight:800;color:var(--gold-strong)}
+.dbuy{background:var(--surface);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.dbuy h4{margin:0;font-size:17px}.dbuy p{margin:0;font-size:14px;color:var(--sub);line-height:1.6}
+.dbuy button{border:0;border-radius:14px;padding:14px;font:800 16px var(--font);cursor:pointer;background:var(--blue);color:var(--on-blue,#fff)}
+.dbuy button:disabled{background:var(--line);color:var(--muted);cursor:default}
+.dbuy .row2{display:flex;gap:8px}.dbuy .row2 button{flex:1}.dbuy .row2 .no{background:var(--card);color:var(--fg)}
+.dlog{background:var(--surface);border-radius:20px;padding:6px 18px}
+.dlog h4{margin:12px 0 4px;font-size:16px}
+.dlog li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--line);font-size:15px}
+.dlog li:first-child{border-top:0}.dlog ul{list-style:none;margin:0;padding:0}
+.dlog li small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.dlog .p{color:#2E9A55;font-weight:800;white-space:nowrap}.dlog .m{color:#E5484D;font-weight:800;white-space:nowrap}
+.dlog .emp{color:var(--muted);font-size:14px;padding:14px 0}
 .chars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .chars button{border:2px solid transparent;background:var(--surface);border-radius:16px;padding:8px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:var(--fg);font:600 12.5px var(--font)}
 .chars button[aria-checked="true"]{border-color:var(--blue);background:var(--blue-soft,var(--surface))}
@@ -439,7 +494,8 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 .pmenu button:hover{background:var(--surface)}.pmenu .danger{color:var(--pink-ink)}
 .topbar{display:block}.topbar .streak{display:flex;width:100%;justify-content:flex-start}
 .coin{white-space:nowrap}
-@media (max-width:380px){.coin span{display:none}}
+@media (max-width:440px){.hr{gap:6px!important}.ib,.avatar{width:38px!important;height:38px!important}.avatar svg{width:38px;height:38px}}
+@media (max-width:400px){.coin span{display:none}}
 .fld input[type=date]{display:block;max-width:100%;min-width:0;-webkit-appearance:none;appearance:none;text-align:left}
 .ferr{color:#E5484D;font-size:13px;margin:0;min-height:0}
 .memo{display:flex;flex-direction:column;gap:6px}
@@ -483,13 +539,15 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
 </div>
 <div class="wrap">
   <header class="hbar" id="acctBar">
-    <button class="coin" id="coinBtn" type="button" aria-label="데나리온, 무화과나무 보기"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#F5B428"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="#C98A0B" stroke-width="1.6"/><path d="M12 7.5v9M9.6 9.6c0-1 1-1.6 2.4-1.6s2.4.6 2.4 1.5c0 2.4-4.8 1.4-4.8 3.9 0 1 1 1.6 2.4 1.6s2.4-.6 2.4-1.6" fill="none" stroke="#7A5200" stroke-width="1.4" stroke-linecap="round"/></svg><b id="coinN">0</b><span>데나리온</span></button>
+    <button class="coin" id="coinBtn" type="button" aria-label="데나리온 기록 보기"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#F5B428"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="#C98A0B" stroke-width="1.6"/><path d="M12 7.5v9M9.6 9.6c0-1 1-1.6 2.4-1.6s2.4.6 2.4 1.5c0 2.4-4.8 1.4-4.8 3.9 0 1 1 1.6 2.4 1.6s2.4-.6 2.4-1.6" fill="none" stroke="#7A5200" stroke-width="1.4" stroke-linecap="round"/></svg><b id="coinN">0</b><span>데나리온</span></button>
     <div class="hr">
       <button class="ib sprout" id="figBtn" type="button" aria-label="무화과나무 키우기"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-8" stroke="#2E9A55" stroke-width="2.2"/><path d="M12 13c0-4-3-6.5-7-6.5 0 4 3 6.5 7 6.5z" fill="#5CC679" stroke="#2E9A55" stroke-width="1.6"/><path d="M12 11c0-3.6 2.6-6 6.5-6 0 3.6-2.6 6-6.5 6z" fill="#7FD98F" stroke="#2E9A55" stroke-width="1.6"/><path d="M7 21h10" stroke="#9A6B3D" stroke-width="2.2"/></svg><i id="figDot" hidden></i></button>
+      <button class="ib hand" id="frBtn" type="button" aria-label="성도의 교제"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 11.5l3.2-3.6c.6-.6 1.4-.8 2.2-.6l2.4.7" stroke="#C26A1E" stroke-width="1.7"/><path d="M21.5 11.5l-3.2-3.6c-.6-.6-1.4-.8-2.2-.6l-3.7 1.1c-.8.2-1.4.9-1.3 1.7.1 1 1.1 1.6 2 1.3l2.3-.7" fill="#FFD9B0" stroke="#C26A1E" stroke-width="1.7"/><path d="M5.5 13.2l4.4 4.3c.6.6 1.6.6 2.2 0l5.6-5.4-2.1-2.3" fill="#FFE6CC" stroke="#C26A1E" stroke-width="1.7"/><path d="M9.3 15.2l1.4-1.4M11.2 16.6l1.4-1.4" stroke="#C26A1E" stroke-width="1.5"/></svg><i id="frDot" hidden></i></button>
       <button class="ib inbox" id="inboxBtn" type="button" hidden aria-label="받은 마음"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H5.2L4 17.2z"/><path d="M8 9h8M8 12h5"/></svg><b id="inboxN" hidden>0</b></button>
+      <button class="ib" id="schBtn" type="button" aria-label="전체 일정"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="8.5" cy="14.5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="1" fill="currentColor" stroke="none"/></svg></button>
       <button class="ib" id="openSet" type="button" aria-label="개인 설정"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
       <div class="pm"><button class="avatar" id="avBtn" type="button" aria-haspopup="menu" aria-expanded="false" hidden><span id="avTx"></span></button>
-        <div class="pmenu" id="pMenu" role="menu" hidden><div class="pmh"><b id="acctNm"></b></div><button type="button" role="menuitem" id="pmSet">개인 설정</button><button type="button" role="menuitem" id="pmInbox">받은 마음</button><button type="button" role="menuitem" class="danger" id="acctOut" hidden>로그아웃</button></div></div>
+        <div class="pmenu" id="pMenu" role="menu" hidden><div class="pmh"><b id="acctNm"></b></div><button type="button" role="menuitem" id="pmSch">📅 전체 일정</button><button type="button" role="menuitem" id="pmFig">🌱 무화과나무 키우기</button><button type="button" role="menuitem" id="pmDen">🪙 데나리온 기록</button><button type="button" role="menuitem" id="pmFr">🤝 성도의 교제</button><button type="button" role="menuitem" id="pmSet">개인 설정</button><button type="button" role="menuitem" id="pmInbox">받은 마음</button><button type="button" role="menuitem" class="danger" id="acctOut" hidden>로그아웃</button></div></div>
     </div>
   </header>
   <div class="topbar">
@@ -521,12 +579,6 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
     <p class="wnote" id="wnote"></p>
     <button class="b2 brag" id="bBrag" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>자랑하기</button>
   </section>
-  <section class="grp" id="grpSec" hidden aria-label="함께 읽기">
-    <div class="whead"><h3>함께 읽기</h3><span class="mercy" id="grpN" hidden></span></div>
-    <div class="glst" id="grpList"></div>
-    <div class="btns"><button class="b2 pri" id="grpNew" type="button" style="flex:1">모임 만들기</button><button class="b2" id="grpJoin" type="button" style="flex:1">초대코드로 참여</button></div>
-    <p class="wnote" id="grpMsg" style="font-size:13px" aria-live="polite"></p>
-  </section>
   <section class="s-find">
     <h2 class="sec-t">말씀 찾기</h2>
     <div class="find">
@@ -554,8 +606,13 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
       </div>
     </details>
   </section>
+  </div>
+  <p class="foot">체크한 기록은 이 페이지에 저장돼요. 하루 밀려도 괜찮아요. 날짜 대신 일차로만 세요.<br>모든 날에 해설이 들어 있어요. 개혁주의 관점으로 썼어요. 함께 읽을 책은 권·장 단위로 위치를 적었어요(판본마다 쪽수가 달라서). '책 속 한 구절'은 저작권이 끝난 고전(칼빈, 어거스틴, 루터, 오웬, 번연, 에드워즈 등)을 직접 번역했고, 교리문답은 웨스트민스터·하이델베르크·도르트 원문을 옮겼어요. 메모는 나만 볼 수 있어요.<br>자비는 처음에 3개가 있고, 7일 연속으로 읽을 때마다 1개씩 더 생겨요. 빈 날을 누르면 자비로 채울 수 있어요.</p>
+</div>
+<div class="fpage" id="schPage" role="dialog" aria-modal="true" aria-labelledby="schT" hidden><div class="fpin">
+  <div class="fphd"><button class="ib pgBack" type="button" aria-label="뒤로"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="schT">전체 일정</h2></div>
   <section class="s-sched">
-    <div class="shead"><h2 class="sec-t">전체 일정</h2>
+    <div class="shead"><h2 class="sec-t" hidden>전체 일정</h2>
       <div class="vtabs" role="tablist" aria-label="보기 방식"><button type="button" role="tab" id="vList" aria-selected="true">목록</button><button type="button" role="tab" id="vCal" aria-selected="false">캘린더</button><button type="button" role="tab" id="vRng" aria-selected="false">읽은 범위</button></div></div>
     <div class="parts" id="parts"></div>
     <div class="rng" id="rng" hidden></div>
@@ -567,11 +624,29 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.45)}
       <div class="cdet" id="cDet"></div>
     </div>
   </section>
+</div></div>
+<div class="fpage" id="denPage" role="dialog" aria-modal="true" aria-labelledby="denT" hidden><div class="fpin">
+  <div class="fphd"><button class="ib pgBack" type="button" aria-label="뒤로"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="denT">데나리온</h2></div>
+  <div class="den" id="den"></div>
+</div></div>
+<div class="fpage" id="frPage" role="dialog" aria-modal="true" aria-labelledby="frT" hidden><div class="fpin">
+  <div class="fphd"><button class="ib pgBack" type="button" aria-label="뒤로"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="frT">성도의 교제</h2></div>
+  <div class="gtabs" role="tablist" aria-label="성도의 교제"><button type="button" role="tab" id="tbFr" aria-selected="true" aria-controls="paneFr">🤝 친구</button><button type="button" role="tab" id="tbGp" aria-selected="false" aria-controls="paneGp">👥 모임</button><button type="button" role="tab" id="tbPr" aria-selected="false" aria-controls="panePr">🌳 중보기도나무</button></div>
+  <div class="gpane frp" id="paneFr" role="tabpanel" aria-labelledby="tbFr"></div>
+  <div class="gpane frp" id="paneGp" role="tabpanel" aria-labelledby="tbGp" hidden>
+  <section class="grp" id="grpSec" hidden aria-label="함께 읽기">
+    <div class="gpane" id="paneGrp">
+    <div class="whead"><h3>함께 읽기 모임</h3><span class="mercy" id="grpN" hidden></span></div>
+    <div class="glst" id="grpList"></div>
+    <div class="btns cloudOnly"><button class="b2 pri" id="grpNew" type="button" style="flex:1">모임 만들기</button><button class="b2" id="grpJoin" type="button" style="flex:1">초대코드로 참여</button></div>
+    </div>
+    <p class="wnote" id="grpMsg" style="font-size:13px" aria-live="polite"></p>
+  </section>
   </div>
-  <p class="foot">체크한 기록은 이 페이지에 저장돼요. 하루 밀려도 괜찮아요. 날짜 대신 일차로만 세요.<br>모든 날에 해설이 들어 있어요. 개혁주의 관점으로 썼어요. 함께 읽을 책은 권·장 단위로 위치를 적었어요(판본마다 쪽수가 달라서). '책 속 한 구절'은 저작권이 끝난 고전(칼빈, 어거스틴, 루터, 오웬, 번연, 에드워즈 등)을 직접 번역했고, 교리문답은 웨스트민스터·하이델베르크·도르트 원문을 옮겼어요. 메모는 나만 볼 수 있어요.<br>자비는 처음에 3개가 있고, 7일 연속으로 읽을 때마다 1개씩 더 생겨요. 빈 날을 누르면 자비로 채울 수 있어요.</p>
-</div>
+  <div class="gpane frp" id="panePr" role="tabpanel" aria-labelledby="tbPr" hidden></div>
+</div></div>
 <div class="fpage" id="figPage" role="dialog" aria-modal="true" aria-labelledby="figT" hidden><div class="fpin">
-  <div class="fphd"><button class="ib" id="figBack" type="button" aria-label="뒤로"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="figT">무화과나무 키우기</h2></div>
+  <div class="fphd"><button class="ib pgBack" id="figBack" type="button" aria-label="뒤로"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="figT">무화과나무 키우기</h2></div>
   <div class="fig" id="fig"></div>
 </div></div>
 <dialog class="sheet" id="setDlg" aria-labelledby="setT"><div class="sin">
@@ -809,7 +884,7 @@ const addD=(s,n)=>{const d=pd(s);d.setDate(d.getDate()+n);return ymd(d)};
 const today=()=>ymd(new Date());
 const kdate=s=>{const d=pd(s);return (d.getMonth()+1)+'월 '+d.getDate()+'일 '+WDN[d.getDay()]+'요일'};
 let H={set:{start:null,wd:[1,1,1,1,1,1,1],off:[],at:0},log:{},dd:{}},href=null,hfresh=false;
-function hload(){try{const v=JSON.parse(localStorage.getItem(HKEY)||'null');if(v&&v.set){H.set=Object.assign(H.set,v.set);H.log=v.log||{};H.dd=v.dd||{};H.harvested=Number.isInteger(v.harvested)?v.harvested:0;if(v.pick)H.pick=v.pick;if(typeof v.avatar==='string')H.avatar=v.avatar}}catch(e){}
+function hload(){try{const v=JSON.parse(localStorage.getItem(HKEY)||'null');if(v&&v.set){H.set=Object.assign(H.set,v.set);H.log=v.log||{};H.dd=v.dd||{};H.harvested=Number.isInteger(v.harvested)?v.harvested:0;if(v.pick)H.pick=v.pick;if(typeof v.avatar==='string')H.avatar=v.avatar;if(Number.isInteger(v.spent))H.spent=v.spent;if(Number.isInteger(v.bought))H.bought=v.bought;if(Array.isArray(v.ledger))H.ledger=v.ledger}}catch(e){}
   if(!H.set.start){H.set.start=today();hfresh=true;hlocal()}}
 function hlocal(){try{localStorage.setItem(HKEY,JSON.stringify(H))}catch(e){}}
 let hsaving=false,hpend=false;
@@ -827,7 +902,7 @@ function streak(){const t=today();let n=0,s=t;for(let k=0;k<4000;k++){const v=H.
 function mercyLeft(){const t=today(),ks=Object.keys(H.log).sort();let used=0,earned=0;
   if(ks.length){let run=0;for(let s=ks[0];s<=t;s=addD(s,1)){const v=H.log[s];if(v===2)used++;
     if(v===1){run++;if(run%7===0)earned++}else if(!v&&isRD(s)&&s<t)run=0}}
-  return Math.max(0,3+earned-used)}
+  return Math.max(0,3+earned+(H.bought||0)-used)}
 function markRead(n){const t=today();H.log[t]=1;const a=H.dd[t]||(H.dd[t]=[]);if(n&&!a.includes(n))a.push(n);hsave()}
 function readToday(){const t=today();return H.log[t]===1?(H.dd[t]||[]).filter(n=>done.has(n)):[]}
 function unmark(n){let hit=null;for(const k in H.dd){if(H.dd[k].includes(n)){hit=k;break}}
@@ -862,7 +937,7 @@ function weekRender(){const host=document.getElementById('wk');host.innerHTML=''
 let view='list',calM=null,calSel=null;
 function setView(v){if(v==='fig'){openFig();return}view=v;[['vList','list'],['vCal','cal'],['vRng','rng']].forEach(([id,k])=>document.getElementById(id).setAttribute('aria-selected',v===k));
   document.getElementById('parts').hidden=v!=='list';document.getElementById('cal').hidden=v!=='cal';document.getElementById('rng').hidden=v!=='rng';if(v==='rng')rngRender();try{localStorage.setItem(NS('bibleplan2-view'),v)}catch(e){}
-  if(v==='cal')calRender();if(v!=='list')document.querySelector('.s-sched').scrollIntoView({block:'start',behavior:'smooth'})}
+  if(v==='cal')calRender();}
 function calRender(){if(!calM)calM=today().slice(0,7);if(!calSel)calSel=today();
   const [y,m]=calM.split('-').map(Number);document.getElementById('cTitle').textContent=y+'년 '+m+'월';
   const g=document.getElementById('cGrid');g.innerHTML='';WDN.forEach(w=>g.append(el('span','cw',w)));
@@ -887,7 +962,9 @@ function toggleDate(s){const st=stOf(s);if(s>today()||st==='before')return;
 // ===== 무화과나무 키우기 · 데나리온 · 읽은 범위 =====
 const DAYS_PER_TREE=7,DEN_PER_TREE=10;
 function readDays(){return Object.keys(H.log||{}).filter(k=>H.log[k]===1).length}
-function figState(){const r=readDays(),trees=Math.floor(r/DAYS_PER_TREE),hv=Math.min(H.harvested||0,trees);return{r,trees,hv,ready:trees-hv,stage:r%DAYS_PER_TREE,den:hv*DEN_PER_TREE}}
+const MERCY_PRICE=50,MERCY_PACK=2;
+function figState(){const r=readDays(),trees=Math.floor(r/DAYS_PER_TREE),hv=Math.min(H.harvested||0,trees),earned=hv*DEN_PER_TREE;return{r,trees,hv,ready:trees-hv,stage:r%DAYS_PER_TREE,earned,den:Math.max(0,earned-(H.spent||0))}}
+function ledAdd(k,den,m){const L=H.ledger||(H.ledger=[]);L.push({t:Date.now(),d:today(),k,den,m:m||0});if(L.length>300)L.splice(0,L.length-300)}
 function treeSVG(stage,size){const s=Math.max(0,Math.min(7,stage)),h=[0,10,18,28,38,48,56,60][s];const W=size||110;
   let g='<svg width="'+W+'" height="'+W+'" viewBox="0 0 120 120" aria-hidden="true"><ellipse cx="60" cy="108" rx="40" ry="8" fill="#C9A77C"/><ellipse cx="60" cy="106" rx="30" ry="5" fill="#8B6A43"/>';
   if(s===0)return g+'<ellipse cx="60" cy="101" rx="5" ry="3.5" fill="#6B4E2E"/></svg>';
@@ -920,18 +997,43 @@ function charSVG(k,z){z=z||42;const sk='#F6D2B0',ey='<path d="M19 21q2 1.6 4 0M2
 function avRender(){const av=document.getElementById('avBtn'),at=document.getElementById('avTx');if(!av||!at)return;const name=STANDALONE?(ME&&ME.name):ACCT.name;if(H.avatar&&CHARS.some(c=>c[0]===H.avatar)){if(!av.classList.contains('has')||at.dataset.k!==H.avatar){at.innerHTML=charSVG(H.avatar,42);at.dataset.k=H.avatar;av.classList.add('has')}}else{at.textContent=(name||'나').slice(0,1);at.dataset.k='';av.classList.remove('has')}}
 function charGrid(){const g=document.getElementById('charGrid');if(!g)return;g.innerHTML='';CHARS.forEach(([k,lb,sh])=>{const b=el('button');b.type='button';b.setAttribute('aria-label',lb);b.setAttribute('role','radio');b.setAttribute('aria-checked',H.avatar===k);b.innerHTML=charSVG(k,44);b.append(el('span',null,sh||lb));
   b.addEventListener('click',()=>{H.avatar=H.avatar===k?'':k;hsave();charGrid();drawTopAcct();coinRender()});g.append(b)})}
-let figOpen=false;
-function openFig(){const p=document.getElementById('figPage');if(!p.hidden)return;p.hidden=false;figOpen=true;document.body.style.overflow='hidden';figRender();p.scrollTop=0;try{history.pushState({fig:1},'')}catch(e){}document.getElementById('figBack').focus()}
-function closeFig(fromPop){const p=document.getElementById('figPage');if(p.hidden)return;p.hidden=true;figOpen=false;document.body.style.overflow='';if(!fromPop){try{if(history.state&&history.state.fig)history.back()}catch(e){}}document.getElementById('figBtn').focus()}
-document.getElementById('figBack').addEventListener('click',()=>closeFig());
-window.addEventListener('popstate',()=>{if(figOpen)closeFig(true)});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&figOpen)closeFig()});
+let curPage=null,pageOpener=null;
+function openPage(id,render){const p=document.getElementById(id);if(curPage&&curPage!==id)closePage(true,true);if(!p.hidden){render&&render();return}
+  pageOpener=document.activeElement;p.hidden=false;curPage=id;document.body.style.overflow='hidden';render&&render();p.scrollTop=0;
+  try{if(!(history.state&&history.state.pg))history.pushState({pg:1},'')}catch(e){}const b=p.querySelector('.pgBack');if(b)b.focus({preventScroll:true})}
+function closePage(fromPop,keepHist){if(!curPage)return;const p=document.getElementById(curPage);p.hidden=true;curPage=null;if(keepHist)return;document.body.style.overflow='';
+  if(!fromPop){try{if(history.state&&history.state.pg)history.back()}catch(e){}}if(pageOpener&&pageOpener.focus)try{pageOpener.focus({preventScroll:true})}catch(e){}}
+const openFig=()=>openPage('figPage',figRender),closeFig=()=>closePage();
+function openSch(v){openPage('schPage',()=>{setView(v||view)})}
+function openDen(){denAsk=false;openPage('denPage',denRender)}
+document.querySelectorAll('.pgBack').forEach(b=>b.addEventListener('click',()=>closePage()));
+window.addEventListener('popstate',()=>{if(curPage)closePage(true)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&curPage&&!document.querySelector('dialog[open]'))closePage()});
+let denAsk=false;
+function denRender(){const box=document.getElementById('den');if(!box)return;const f=figState();box.innerHTML='';
+  const bal=el('div','dbal');bal.append(el('span',null,'지금 가진 데나리온'),el('b',null,f.den+' 데나리온'),el('span',null,'무화과나무 한 그루를 수확하면 '+DEN_PER_TREE+' 데나리온을 받아요. 지금 자비는 '+mercyLeft()+'개 있어요.'));box.append(bal);
+  const by=el('div','dbuy');by.append(el('h4',null,'🕊️ 자비 '+MERCY_PACK+'개 사기'),el('p',null,MERCY_PRICE+' 데나리온으로 자비 '+MERCY_PACK+'개를 살 수 있어요. 자비는 읽지 못한 날을 채워 연속 기록을 지켜 줘요.'));
+  if(!denAsk){const b=el('button',null,f.den>=MERCY_PRICE?MERCY_PRICE+' 데나리온으로 사기':(MERCY_PRICE-f.den)+' 데나리온 더 모으면 살 수 있어요');b.type='button';b.id='denBuy';b.disabled=f.den<MERCY_PRICE;b.addEventListener('click',()=>{denAsk=true;denRender();const y=document.getElementById('denYes');if(y)y.focus()});by.append(b)}
+  else{by.append(el('p',null,MERCY_PRICE+' 데나리온을 써서 자비 '+MERCY_PACK+'개를 살까요?'));const r2=el('div','row2'),y=el('button',null,'네, 살게요'),n=el('button','no','아니요');y.type=n.type='button';y.id='denYes';
+    y.addEventListener('click',()=>{if(figState().den>=MERCY_PRICE){H.spent=(H.spent||0)+MERCY_PRICE;H.bought=(H.bought||0)+MERCY_PACK;ledAdd('b',MERCY_PRICE,MERCY_PACK);hsave()}denAsk=false;hrender();denRender();const m=document.getElementById('denMsg');if(m)m.textContent='자비 '+MERCY_PACK+'개를 샀어요 🕊️'});
+    n.addEventListener('click',()=>{denAsk=false;denRender()});r2.append(n,y);by.append(r2)}
+  const msg=el('p');msg.id='denMsg';msg.setAttribute('role','status');msg.style.cssText='margin:0;font-weight:700;color:var(--blue)';by.append(msg);box.append(by);
+  const lg=el('div','dlog');lg.append(el('h4',null,'적립 · 사용 기록'));const ul=el('ul');const L=(H.ledger||[]).slice().sort((a,b)=>b.t-a.t);
+  const lh=L.filter(e=>e.k==='h').reduce((a,e)=>a+e.den,0),lb=L.filter(e=>e.k==='b').reduce((a,e)=>a+e.den,0),oldE=f.earned-lh,oldS=(H.spent||0)-lb;
+  const fmt=d=>{const [y,m,dd]=d.split('-');return y+'년 '+(+m)+'월 '+(+dd)+'일'};
+  L.forEach(e=>{const li=el('li'),l=el('div');l.append(document.createTextNode(e.k==='h'?'🧺 무화과 열매 수확 ('+(e.den/DEN_PER_TREE)+'그루)':'🕊️ 자비 '+e.m+'개 구입'),el('small',null,fmt(e.d)));li.append(l,el('span',e.k==='h'?'p':'m',(e.k==='h'?'+':'−')+e.den));ul.append(li)});
+  if(oldE>0){const li=el('li'),l=el('div');l.append(document.createTextNode('🧺 이전에 수확한 열매'),el('small',null,'기록 기능이 생기기 전'));li.append(l,el('span','p','+'+oldE));ul.append(li)}
+  if(oldS>0){const li=el('li'),l=el('div');l.append(document.createTextNode('🕊️ 이전에 쓴 데나리온'),el('small',null,'다른 기기 기록'));li.append(l,el('span','m','−'+oldS));ul.append(li)}
+  if(!ul.children.length)ul.append(el('li','emp','아직 기록이 없어요. 7일 읽고 무화과 열매를 수확해 보세요 🌱'));
+  lg.append(ul);box.append(lg);
+  const go=el('button',null,'🌱 무화과나무 보러 가기');go.type='button';go.style.cssText='border:0;background:var(--surface);color:var(--fg);font:700 15px var(--font);padding:14px;border-radius:14px;cursor:pointer';go.addEventListener('click',openFig);box.append(go)}
+
 function figRender(){const box=document.getElementById('fig');if(!box)return;const f=figState();box.innerHTML='';
   const cur=el('div','fcur');const art=el('div');art.innerHTML=treeSVG(f.stage===0&&f.ready>0?7:f.stage,120);const tx=el('div');
   const left=DAYS_PER_TREE-f.stage;tx.append(el('h4',null,f.stage===0?'새 무화과나무를 심었어요 🌱':'무화과나무가 자라고 있어요'),
     el('p',null,'성경을 읽은 날이 '+DAYS_PER_TREE+'일 모이면 나무 한 그루가 다 자라 열매를 맺어요. '+(f.stage?'지금 '+f.stage+'일째 자라는 중, '+left+'일 더 읽으면 열매가 열려요.':'오늘부터 읽으면 싹이 나요.')));
   const st=el('div','fsteps');for(let k=0;k<DAYS_PER_TREE;k++)st.append(el('i',k<f.stage?'on':''));tx.append(st);cur.append(art,tx);box.append(cur);
-  if(f.ready>0){const hb=el('button','harv','🧺 열매 수확하기 · +'+(f.ready*DEN_PER_TREE)+' 데나리온');hb.type='button';hb.addEventListener('click',()=>{H.harvested=(H.harvested||0)+f.ready;hsave();coinRender();figRender();
+  if(f.ready>0){const hb=el('button','harv','🧺 열매 수확하기 · +'+(f.ready*DEN_PER_TREE)+' 데나리온');hb.type='button';hb.addEventListener('click',()=>{H.harvested=(H.harvested||0)+f.ready;ledAdd('h',f.ready*DEN_PER_TREE,0);hsave();coinRender();figRender();
       const m=document.getElementById('figMsg');if(m)m.textContent='수확했어요! '+(f.ready*DEN_PER_TREE)+' 데나리온을 받았어요 🎉'});box.append(hb)}
   const ms=el('p','wnote');ms.id='figMsg';ms.setAttribute('aria-live','polite');box.append(ms);
   const sd=el('div','fstat');[['읽은 날',f.r+'일'],['키운 나무',f.trees+'그루'],['데나리온',f.den]].forEach(([a,b])=>{const d=el('div');d.append(el('span',null,a),el('b',null,String(b)));sd.append(d)});box.append(sd);
@@ -946,7 +1048,7 @@ function rngRender(){const box=document.getElementById('rng');if(!box)return;con
     const d=el('details','rbook'+(r===NCH[bk]?' full':''));const sm2=el('summary');sm2.append(el('span','bn',bk),el('span','bc',r===NCH[bk]?'다 읽었어요 ✓':r+' / '+NCH[bk]+'장'));const br=el('div','rbar');const i=el('i');i.style.width=(r/NCH[bk]*100)+'%';br.append(i);sm2.append(br);d.append(sm2);
     d.addEventListener('toggle',()=>{if(d.open&&!d.querySelector('.chg')){const g=el('div','chg');for(let c=1;c<=NCH[bk];c++)g.append(el('span',rs.has(bk+'|'+c)?'on':'',String(c)));d.append(g)}});box.append(d)})})}
 document.getElementById('figBtn').addEventListener('click',openFig);document.getElementById('vRng').addEventListener('click',()=>setView('rng'));
-document.getElementById('coinBtn').addEventListener('click',openFig);
+document.getElementById('coinBtn').addEventListener('click',openDen);document.getElementById('schBtn').addEventListener('click',()=>openSch('cal'));
 document.getElementById('openSet').addEventListener('click',coinRender);
 
 // ===== 읽음 확인 팝업 + 격려 =====
@@ -975,7 +1077,7 @@ function askRead(i){const d=PLAN[i],B=gpOpen();B.innerHTML='';const rd=readToday
   const bt=el('div','btns');const no=el('button','b2',todays?'아니요, 아직이에요':'아니요');no.type='button';no.style.flex='1';no.addEventListener('click',gpClose);
   const yes=el('button','b2 pri',todays?'네, 다 읽었어요':'네, 읽었어요');yes.type='button';yes.style.flex='2';
   yes.addEventListener('click',()=>{done.add(i+1);markRead(i+1);refresh();save();cheerUp()});bt.append(no,yes);B.append(bt);setTimeout(()=>yes.focus(),30)}
-function hrender(){try{coinRender();if(!document.getElementById('figPage').hidden)figRender();if(view==='rng')rngRender()}catch(e){}if(!DATEOF.length&&H.set.wd.some(Boolean))resched();weekRender();if(view==='cal')calRender()}
+function hrender(){try{coinRender();if(!document.getElementById('figPage').hidden)figRender();if(!document.getElementById('denPage').hidden)denRender();if(view==='rng')rngRender()}catch(e){}if(!DATEOF.length&&H.set.wd.some(Boolean))resched();weekRender();if(view==='cal')calRender()}
 // 설정 시트
 let draft=null;
 function openSet(){draft=JSON.parse(JSON.stringify(H.set));charGrid();draft.plan=normPlan(draft.plan||CURP);document.getElementById('sStart').value=draft.start;document.getElementById('sErr').textContent='';drawSet();
@@ -1083,10 +1185,10 @@ function cleanState(x){if(!x||typeof x!=='object'||Array.isArray(x))return null;
     const st=h.set;if(st&&typeof st==='object'&&typeof st.start==='string'&&DRE.test(st.start)&&Array.isArray(st.wd)&&st.wd.length===7){
       hh.set={start:st.start,wd:st.wd.map(v=>v?1:0),off:(Array.isArray(st.off)?st.off:[]).filter(d=>typeof d==='string'&&DRE.test(d)).slice(0,1000),at:Number(st.at)||0,
         plan:normPlan(st.plan&&typeof st.plan==='object'?{mode:String(st.plan.mode),n:Number(st.plan.n),first:st.plan.first==='nt'?'nt':'ot',order:Array.isArray(st.plan.order)?st.plan.order.filter(b=>CANON.includes(b)):null,seq:Array.isArray(st.plan.seq)?st.plan.seq.filter(b=>CANON.includes(b)):null}:null)}}
-    hh.harvested=Number.isInteger(h.harvested)&&h.harvested>=0&&h.harvested<10000?h.harvested:0;if(typeof h.avatar==='string'&&/^[a-z]{2,8}$/.test(h.avatar))hh.avatar=h.avatar;o.habit=hh}
+    hh.harvested=Number.isInteger(h.harvested)&&h.harvested>=0&&h.harvested<10000?h.harvested:0;if(typeof h.avatar==='string'&&/^[a-z]{2,8}$/.test(h.avatar))hh.avatar=h.avatar;const I=(x,mx)=>Number.isInteger(x)&&x>=0&&x<mx?x:0;hh.spent=I(h.spent,1e6);hh.bought=I(h.bought,1e5);hh.ledger=Array.isArray(h.ledger)?h.ledger.filter(e=>e&&typeof e==='object'&&Number.isFinite(e.t)&&(e.k==='h'||e.k==='b')&&/^\d{4}-\d{2}-\d{2}$/.test(String(e.d))).slice(-300).map(e=>({t:+e.t,d:String(e.d),k:e.k,den:I(Math.abs(e.den|0),1e5),m:I(e.m|0,100)})):[];o.habit=hh}
   return o}
 function applyState(x){x=cleanState(x);if(!x)return;(x.done||[]).forEach(n=>done.add(n));Object.keys(x.memos||{}).forEach(k=>{if(x.memos[k]&&!(memos[k]&&memos[k].trim()))memos[k]=x.memos[k]});
-  const h=x.habit;if(h){if(h.harvested>(H.harvested||0))H.harvested=h.harvested;if(h.avatar&&!H.avatar)H.avatar=h.avatar;Object.keys(h.log||{}).forEach(k=>{if(!H.log[k]||h.log[k]===1)H.log[k]=h.log[k]});Object.keys(h.dd||{}).forEach(k=>{H.dd[k]=[...new Set([...(H.dd[k]||[]),...h.dd[k]])]});
+  const h=x.habit;if(h){if(h.harvested>(H.harvested||0))H.harvested=h.harvested;if(h.avatar&&!H.avatar)H.avatar=h.avatar;H.spent=Math.max(H.spent||0,h.spent||0);H.bought=Math.max(H.bought||0,h.bought||0);if(Array.isArray(h.ledger)){const seen=new Set((H.ledger||[]).map(e=>e.t+e.k));H.ledger=(H.ledger||[]).concat(h.ledger.filter(e=>e&&!seen.has(e.t+e.k))).sort((a,b)=>a.t-b.t).slice(-300)}Object.keys(h.log||{}).forEach(k=>{if(!H.log[k]||h.log[k]===1)H.log[k]=h.log[k]});Object.keys(h.dd||{}).forEach(k=>{H.dd[k]=[...new Set([...(H.dd[k]||[]),...h.dd[k]])]});
     if(h.set&&(hfresh||(h.set.at||0)>(H.set.at||0)))H.set=Object.assign({},H.set,h.set)}
   local();mlocal();hlocal();if(H.set.plan&&typeof CURP!=='undefined'&&planSig(H.set.plan)!==planSig(CURP)&&document.getElementById('parts').childNodes.length)switchPlan(normPlan(H.set.plan));resched()}
 function applySeed(){const sd=window.__SEED;if(!sd)return;let seen=null;try{seen=localStorage.getItem(NS('bibleplan2-seed'))}catch(e){}if(String(sd.at)===seen)return;
@@ -1227,7 +1329,7 @@ document.getElementById('acctOut').addEventListener('click',logout);
 (()=>{const av=document.getElementById('avBtn'),pm=document.getElementById('pMenu');const close=()=>{pm.hidden=true;av.setAttribute('aria-expanded','false')};
   av.addEventListener('click',e=>{e.stopPropagation();pm.hidden=!pm.hidden;av.setAttribute('aria-expanded',String(!pm.hidden));document.getElementById('pmInbox').hidden=document.getElementById('inboxBtn').hidden});
   document.addEventListener('click',e=>{if(!pm.hidden&&!pm.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-  document.getElementById('pmSet').addEventListener('click',()=>{close();document.getElementById('openSet').click()});
+  document.getElementById('pmSet').addEventListener('click',()=>{close();document.getElementById('openSet').click()});document.getElementById('pmSch').addEventListener('click',()=>{close();openSch('list')});document.getElementById('pmFig').addEventListener('click',()=>{close();openFig()});document.getElementById('pmDen').addEventListener('click',()=>{close();openDen()});
   document.getElementById('pmInbox').addEventListener('click',()=>{close();document.getElementById('inboxBtn').click()})})();
 
 (()=>{const t=document.getElementById('toTop');const u=()=>t.classList.toggle('on',scrollY>600);addEventListener('scroll',u,{passive:true});u();
@@ -1246,7 +1348,7 @@ function loadSB(){if(SB)return Promise.resolve(SB);return new Promise((res,rej)=
   const go=()=>{try{SB=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'implicit'}});res(SB)}catch(e){rej(e)}};
   if(window.supabase&&window.supabase.createClient){go();return}
   const sc=document.createElement('script');sc.src=SB_SDK;sc.crossOrigin='anonymous';sc.onload=go;sc.onerror=()=>rej(new Error('sdk'));document.head.append(sc)})}
-const ERRK={invalid_code:'초대코드가 맞지 않아요. 다시 확인해 주세요.',group_full:'모임 인원이 가득 찼어요(최대 50명).',too_many_attempts:'시도가 너무 많아요. 잠시 뒤에 다시 해 주세요.',too_many_groups:'모임은 한 사람이 10개까지 만들 수 있어요.',not_member:'이 모임의 모임원이 아니에요.',name_required:'모임 이름을 적어 주세요.'};
+const ERRK={too_many_prayers:'기도 제목은 하루 5개까지 올릴 수 있어요.',too_many_comments:'오늘은 댓글을 더 달 수 없어요(하루 50개).',message_required:'내용을 적어 주세요.',not_found:'지워진 글이에요.',not_friend:'서로 친구가 된 사람에게만 보낼 수 있어요.',query_too_short:'두 글자 이상 넣어 주세요.',too_many_searches:'찾기를 너무 많이 했어요. 한 시간 뒤에 다시 해 주세요.',too_many_requests:'오늘은 친구 요청을 더 보낼 수 없어요.',too_many_friends:'친구는 300명까지 맺을 수 있어요.',self_friend:'나 자신과는 친구를 맺을 수 없어요.',nickname_required:'닉네임을 먼저 정해 주세요.',invalid_code:'초대코드가 맞지 않아요. 다시 확인해 주세요.',group_full:'모임 인원이 가득 찼어요(최대 50명).',too_many_attempts:'시도가 너무 많아요. 잠시 뒤에 다시 해 주세요.',too_many_groups:'모임은 한 사람이 10개까지 만들 수 있어요.',not_member:'이 모임의 모임원이 아니에요.',name_required:'모임 이름을 적어 주세요.'};
 const errMsg=e=>{const m=(e&&(e.message||e.error_description||e.msg))||'';for(const k in ERRK)if(m.includes(k))return ERRK[k];
   if(/Invalid login credentials/i.test(m))return'이메일이나 비밀번호가 맞지 않아요.';if(/already registered|already exists/i.test(m))return'이미 가입된 이메일이에요. 로그인을 눌러 주세요.';
   if(/Email not confirmed/i.test(m))return'메일함의 인증 링크를 먼저 눌러 주세요.';if(/rate limit/i.test(m))return'잠시 뒤에 다시 시도해 주세요.';
@@ -1296,7 +1398,7 @@ async function cloudPush(statsOnly){if(!SB||!cloudReady)return;const now=new Dat
     await SB.from('member_stats').upsert({user_id:CUID,nickname:ME.name||null,done_count:done.size,total_days:PLAN.length,streak:streak(),last_read:lastRead(),current_ref:ci>=0&&PLAN[ci]?PLAN[ci][1]:'완독',updated_at:now})}catch(e){}}
 function replaceState(x){const c=cleanState(x);if(!c)return;cloudApplying=true;
   done=new Set(c.done);Object.keys(memos).forEach(k=>delete memos[k]);Object.assign(memos,c.memos);
-  if(c.habit){H.log=c.habit.log;H.dd=c.habit.dd;H.harvested=c.habit.harvested||0;H.avatar=c.habit.avatar||'';if(c.habit.set)H.set=Object.assign({},H.set,c.habit.set)}
+  if(c.habit){H.log=c.habit.log;H.dd=c.habit.dd;H.harvested=c.habit.harvested||0;H.avatar=c.habit.avatar||'';H.spent=c.habit.spent||0;H.bought=c.habit.bought||0;H.ledger=c.habit.ledger||[];if(c.habit.set)H.set=Object.assign({},H.set,c.habit.set)}
   local();mlocal();hlocal();if(H.set.plan&&planSig(H.set.plan)!==planSig(CURP))setPlan(normPlan(H.set.plan));resched();
   document.querySelectorAll('.cbox').forEach(b=>{b.innerHTML='';delete b.dataset.day});build();cloudApplying=false}
 async function cloudPull(){if(!SB)return;try{const r=await SB.from('progress').select('data,updated_at').eq('user_id',CUID).maybeSingle();if(r.error)throw r.error;
@@ -1344,13 +1446,112 @@ function askText(title,label,ph,btn,cb){const B=gpOpen();B.innerHTML='';B.append
   f.append(fl,er,bt);f.addEventListener('submit',async e=>{e.preventDefault();ok.disabled=true;try{await cb(i.value.trim(),er)}finally{ok.disabled=false}});B.append(f);setTimeout(()=>i.focus(),30);return i}
 async function doJoin(code,er){const r=await SB.rpc('join_group',{p_code:code});if(r.error){(er?er:{set textContent(t){grpMsg(t)}}).textContent=errMsg(r.error);return false}
   setPendingJoin('');const gs=await loadGroups();const g=gs.find(x=>x.id===r.data.id)||Object.assign({member_count:1,is_owner:false},r.data);openGroup(g);return true}
-function groupsSetup(){document.getElementById('grpSec').hidden=false;
+function groupsSetup(){document.getElementById('grpSec').hidden=false;frSetup();prSetup();
   document.getElementById('grpNew').addEventListener('click',()=>askText('모임 만들기','모임 이름','예: 청년부 성경 통독','만들기',async(v,er)=>{if(!v){er.textContent='모임 이름을 적어 주세요.';return}
     const r=await SB.rpc('create_group',{p_name:v});if(r.error){er.textContent=errMsg(r.error);return}await loadGroups();openGroup(Object.assign({member_count:1,is_owner:true},r.data))}));
   document.getElementById('grpJoin').addEventListener('click',()=>{const i=askText('초대코드로 참여','초대코드 6자리','예: K7M2QX','참여하기',async(v,er)=>{const c=v.toUpperCase().replace(/[^A-Z0-9]/g,'');if(c.length<6){er.textContent='초대코드 6자리를 넣어 주세요.';return}await doJoin(c,er)});i.style.textTransform='uppercase';i.style.letterSpacing='.15em'});
   document.getElementById('gpDlg').addEventListener('click',e=>{if(e.target===document.getElementById('gpDlg'))gpClose()})}
-function afterNick(){const j=pendingJoin();if(j)doJoin(j,null)}
+async function afterNick(){const j=pendingJoin();if(j)await doJoin(j,null);const f=pendingFriend();if(f)await doFriendCode(f);else loadFriends()}
 
+
+// --- 성도의 교제 (친구)
+function pendingFriend(){try{return localStorage.getItem('bibleplan2-friend')||''}catch(e){return''}}
+function setPendingFriend(c){try{c?localStorage.setItem('bibleplan2-friend',c):localStorage.removeItem('bibleplan2-friend')}catch(e){}}
+(()=>{try{const u=new URL(location.href);const f=(u.searchParams.get('friend')||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);
+  if(f){setPendingFriend(f);u.searchParams.delete('friend');history.replaceState(null,'',u.pathname+(u.search||'')+u.hash)}}catch(e){}})();
+function openFriends(){openPage('frPage',()=>{if(SB){loadFriends();if(prTabOn())loadPrayers(true)}})}
+const prTabOn=()=>document.getElementById('tbPr').getAttribute('aria-selected')==='true';
+const FTABS={fr:['tbFr','paneFr'],gp:['tbGp','paneGp'],pr:['tbPr','panePr']};
+function frTab(k,quiet){if(!FTABS[k])k='fr';Object.entries(FTABS).forEach(([q,[t,p]])=>{document.getElementById(t).setAttribute('aria-selected',q===k);document.getElementById(p).hidden=q!==k});
+  try{localStorage.setItem(NS('bibleplan2-frtab'),k)}catch(e){}if(quiet)return;if(k==='pr'&&SB&&!prLoaded)loadPrayers(true);if(k==='gp'&&SB)loadGroups()}
+Object.keys(FTABS).forEach(k=>document.getElementById(FTABS[k][0]).addEventListener('click',()=>frTab(k)));
+try{frTab(localStorage.getItem(NS('bibleplan2-frtab'))||'fr',true)}catch(e){}
+// --- 중보기도나무
+let prLoaded=false,prLast=null;
+function ago(t){const d=(Date.now()-new Date(t).getTime())/1000;if(d<60)return'방금';if(d<3600)return Math.floor(d/60)+'분 전';if(d<86400)return Math.floor(d/3600)+'시간 전';if(d<86400*7)return Math.floor(d/86400)+'일 전';const x=new Date(t);return(x.getMonth()+1)+'월 '+x.getDate()+'일'}
+function prSetup(){const P=document.getElementById('panePr');P.innerHTML='';
+  const h=el('div','prh');const art=el('span');art.innerHTML=treeSVG(6,76);const tx=el('div');tx.append(el('h3',null,'중보기도나무'),el('p',null,'"너희가 짐을 서로 지라 그리하여 그리스도의 법을 성취하라" (갈 6:2). 기도 제목을 걸어 두면 성도들이 함께 기도하고 응원해요.'));h.append(art,tx);P.append(h);
+  const w=el('button','b2 pri','🙏 기도 제목 올리기');w.type='button';w.addEventListener('click',prCompose);P.append(w);
+  P.append(el('p','wnote','로그인한 모든 성도가 볼 수 있어요. 연락처·주소 같은 개인정보는 적지 말아 주세요. 신고가 3번 쌓인 글은 자동으로 숨겨져요.'));
+  const m=el('p','wnote');m.id='prMsg';m.setAttribute('aria-live','polite');m.style.cssText='font-size:13px;margin:0';P.append(m);
+  const f=el('div');f.id='prFeed';f.style.cssText='display:flex;flex-direction:column;gap:12px';P.append(f);
+  const more=el('button','prmore','더 보기');more.type='button';more.id='prMore';more.hidden=true;more.addEventListener('click',()=>loadPrayers(false));P.append(more)}
+function prCompose(){const B=gpOpen();B.innerHTML='';B.append(el('h3',null,'🙏 기도 제목 올리기'));
+  const ta=el('textarea');ta.maxLength=300;ta.rows=5;ta.placeholder='함께 기도해 주셨으면 하는 제목을 적어 주세요 (300자까지)';ta.style.cssText='width:100%;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font:16px/1.6 var(--font);background:var(--card);color:var(--fg);resize:vertical';ta.setAttribute('aria-label','기도 제목');
+  const cnt=el('small','wnote','0 / 300');ta.addEventListener('input',()=>{cnt.textContent=ta.value.length+' / 300'});
+  const an=el('label','anon');const cb=el('input');cb.type='checkbox';an.append(cb,document.createTextNode('이름 숨기고 올리기 (익명의 성도로 보여요)'));
+  const er=el('p','ferr');const bt=el('div','btns');const c=el('button','b2','취소');c.type='button';c.style.flex='1';c.addEventListener('click',gpClose);const ok=el('button','b2 pri','올리기');ok.type='button';ok.style.flex='2';
+  ok.addEventListener('click',async()=>{const v=ta.value.trim();if(v.length<2){er.textContent='기도 제목을 두 글자 이상 적어 주세요.';return}ok.disabled=true;
+    try{const r=await SB.rpc('post_prayer',{p_body:v,p_anon:cb.checked});if(r.error)throw r.error;gpClose();await loadPrayers(true);document.getElementById('prMsg').textContent='기도 제목을 나무에 걸었어요 🌳'}catch(e){er.textContent=errMsg(e)}ok.disabled=false});
+  bt.append(c,ok);B.append(el('p','wnote','로그인한 모든 성도가 볼 수 있어요. 개인정보는 적지 말아 주세요.'),ta,cnt,an,er,bt);setTimeout(()=>ta.focus(),30)}
+async function loadPrayers(reset){if(!SB)return;const F=document.getElementById('prFeed');if(!F)return;const more=document.getElementById('prMore');
+  try{const r=await SB.rpc('prayer_feed',{p_before:reset?null:prLast});if(r.error)throw r.error;const L=r.data||[];prLoaded=true;if(reset)F.innerHTML='';
+    if(reset&&!L.length)F.append(el('p','wnote','아직 걸린 기도 제목이 없어요. 첫 기도 제목을 올려 보세요.'));
+    L.forEach(x=>F.append(prCard(x)));if(L.length)prLast=L[L.length-1].created_at;more.hidden=L.length<20}
+  catch(e){if(reset)F.innerHTML='';F.append(el('p','wnote',errMsg(e)))}}
+function prCard(x){const c=el('article','pc');const h=el('div','ph');h.append(el('span','av',x.author==='익명의 성도'?'🕊':(x.author||'성').slice(0,1)));const nm=el('div');nm.append(el('b',null,x.author+(x.is_mine?' (나)':'')),el('br'),el('small',null,ago(x.created_at)));h.append(nm);
+  const mm=el('button','mm',x.is_mine?'삭제':'신고');mm.type='button';mm.setAttribute('aria-label',x.is_mine?'내 기도 제목 지우기':'이 글 신고하기');let armed=false;
+  mm.addEventListener('click',async()=>{if(!armed){armed=true;mm.classList.add('armed');mm.textContent=x.is_mine?'한 번 더 누르면 삭제':'한 번 더 누르면 신고';return}
+    const r=await SB.rpc(x.is_mine?'delete_prayer':'report_prayer',{p_id:x.id});const m=document.getElementById('prMsg');if(r.error){m.textContent=errMsg(r.error);return}c.remove();m.textContent=x.is_mine?'기도 제목을 지웠어요.':'신고했어요. 이 글은 내 화면에서 숨겼어요.'});h.append(mm);
+  const pa=el('div','pa');const pr=el('button','pray');pr.type='button';const setP=()=>{pr.setAttribute('aria-pressed',!!x.i_prayed);pr.textContent=(x.i_prayed?'🙏 기도했어요':'🙏 기도 보내기')+' · '+x.pray_count};setP();
+  pr.addEventListener('click',async()=>{pr.disabled=true;try{const r=await SB.rpc('pray_for',{p_id:x.id});if(r.error)throw r.error;x.i_prayed=!x.i_prayed;x.pray_count=r.data;setP()}catch(e){document.getElementById('prMsg').textContent=errMsg(e)}pr.disabled=false});
+  const cm=el('button','cmt');cm.type='button';const setC=()=>{cm.textContent='💬 응원하기 · '+x.comment_count};setC();cm.setAttribute('aria-expanded','false');
+  const box=el('div','pcm');box.hidden=true;
+  const drawC=async()=>{box.innerHTML='';box.append(el('p','wnote','불러오는 중이에요…'));try{const r=await SB.rpc('prayer_comment_list',{p_id:x.id});if(r.error)throw r.error;box.innerHTML='';
+      (r.data||[]).forEach(k=>{const d=el('div','cm1');d.append(el('b',null,k.nickname),document.createTextNode(k.body),el('small',null,ago(k.created_at)));
+        if(k.is_mine){const del=el('button',null,'지우기');del.type='button';del.addEventListener('click',async()=>{const q=await SB.rpc('delete_prayer_comment',{p_id:k.id});if(!q.error){x.comment_count=Math.max(0,x.comment_count-1);setC();drawC()}});d.append(del)}box.append(d)});
+      if(!(r.data||[]).length)box.append(el('p','wnote','첫 응원 댓글을 남겨 주세요.'));
+      const f=el('form');const i=el('input');i.maxLength=200;i.placeholder='응원의 말을 남겨요 (예: 함께 기도할게요 🙏)';i.setAttribute('aria-label','응원 댓글');const b=el('button',null,'남기기');b.type='submit';f.append(i,b);
+      f.addEventListener('submit',async e=>{e.preventDefault();const v=i.value.trim();if(!v)return;b.disabled=true;const q=await SB.rpc('add_prayer_comment',{p_id:x.id,p_body:v});b.disabled=false;if(q.error){document.getElementById('prMsg').textContent=errMsg(q.error);return}x.comment_count++;setC();await drawC();const ni=box.querySelector('input');if(ni)ni.focus()});box.append(f)}
+    catch(e){box.innerHTML='';box.append(el('p','wnote',errMsg(e)))}};
+  cm.addEventListener('click',()=>{box.hidden=!box.hidden;cm.setAttribute('aria-expanded',String(!box.hidden));if(!box.hidden)drawC()});
+  pa.append(pr,cm);c.append(h,el('p',null,x.body),pa,box);return c}
+const grpTab=k=>{if(k==='fr')openFriends()};
+document.getElementById('frBtn').addEventListener('click',openFriends);
+document.getElementById('pmFr').addEventListener('click',()=>{document.getElementById('pMenu').hidden=true;document.getElementById('avBtn').setAttribute('aria-expanded','false');openFriends()});
+let myFCode='',frCache=[];
+function frLink(c){return location.origin+location.pathname+'?friend='+c}
+function frSetup(){const P=document.getElementById('paneFr');P.innerHTML='';
+  P.append(el('p','wnote','친구 코드나 닉네임으로 성도를 찾아 친구를 맺어요. 상대가 수락하면 서로의 읽기 진도를 보고 권면과 형제사랑을 보낼 수 있어요. 메모는 언제나 나만 봐요.'));
+  const cd=el('div','gcode');const l=el('div');const cb=el('b',null,'······');cb.id='frCode';l.append(el('span',null,'내 친구 코드'),el('br'),cb);cd.append(l);P.append(cd);
+  const bt=el('div','btns');const sh=el('button','b2 pri','친구 초대 링크 보내기');sh.type='button';const cc=el('button','b2','코드 복사');cc.type='button';bt.append(sh,cc);P.append(bt);
+  const fm=el('p','wnote');fm.id='frMsg';fm.setAttribute('aria-live','polite');fm.style.fontSize='13px';
+  sh.addEventListener('click',async()=>{if(!myFCode)return;const text=(ME.name||'')+' 성도님이 성경 통독 친구가 되고 싶어 해요. 친구 코드: '+myFCode,url=frLink(myFCode);
+    try{if(navigator.share){await navigator.share({title:'성도의 교제',text,url});return}}catch(e){if(e&&e.name==='AbortError')return}
+    try{await navigator.clipboard.writeText(text+'\n'+url);fm.textContent='초대 링크를 복사했어요. 카카오톡에 붙여 보내 주세요.'}catch(e){fm.textContent=url}});
+  cc.addEventListener('click',async()=>{if(!myFCode)return;try{await navigator.clipboard.writeText(myFCode);fm.textContent='친구 코드를 복사했어요.'}catch(e){fm.textContent='친구 코드: '+myFCode}});
+  const f=el('form','frs');const lb=el('label',null,'친구 찾기');lb.htmlFor='frQ';lb.className='sr';const q=el('input');q.id='frQ';q.placeholder='친구 코드 또는 닉네임';q.maxLength=12;q.autocomplete='off';
+  const go=el('button','b2 pri','찾기');go.type='submit';f.append(lb,q,go);const res=el('div','frl');res.id='frRes';
+  f.addEventListener('submit',async e=>{e.preventDefault();const v=q.value.trim();res.innerHTML='';if(v.length<2){fm.textContent='두 글자 이상 넣어 주세요.';return}go.disabled=true;fm.textContent='';
+    try{const r=await SB.rpc('find_saint',{p_q:v});if(r.error)throw r.error;const L=r.data||[];
+      if(!L.length)res.append(el('p','wnote','찾는 성도가 없어요. 친구 코드나 닉네임을 정확히 넣어 주세요.'));
+      L.forEach(x=>res.append(frRow(x,'find')))}catch(x){fm.textContent=errMsg(x)}finally{go.disabled=false}});
+  P.append(el('h4',null,'🔎 친구 찾기'),f,res,fm);const box=el('div','frl');box.id='frBox';P.append(box)}
+function frRow(x,mode){const r=el('div','fr');r.append(el('span','av',(x.nickname||'성').slice(0,1)));const tx=el('div','fx');tx.append(el('b',null,x.nickname||'성도'));
+  const st=x.relation||x.status;const pv=x.total_days?x.done_count/x.total_days*100:0;
+  if(st==='friend'&&mode!=='find'){tx.append(el('small',null,(x.last_read===today()?'오늘 읽었어요 · ':'')+(x.current_ref||'')+' · '+(pv>0&&pv<1?pv.toFixed(1):Math.round(pv))+'%'+(x.streak>0?' · 🔥 '+x.streak+'일째':'')))}
+  else tx.append(el('small',null,{friend:'친구예요',outgoing:'수락을 기다리고 있어요',incoming:'나에게 친구 요청을 보냈어요',none:'아직 친구가 아니에요'}[st]||''));
+  r.append(tx);const a=el('div','fa');const B=(t,c,fn)=>{const b=el('button',c,t);b.type='button';if(fn)b.addEventListener('click',async()=>{b.disabled=true;try{await fn()}catch(e){document.getElementById('frMsg').textContent=errMsg(e)}b.disabled=false});a.append(b);return b};
+  if(st==='none')B('친구 맺기','pri',async()=>{const q=await SB.rpc('request_friend',{p_to:x.user_id});if(q.error)throw q.error;x.relation=q.data;r.replaceWith(frRow(x,mode));document.getElementById('frMsg').textContent=q.data==='friend'?x.nickname+'님과 친구가 됐어요 🤝':x.nickname+'님께 친구 요청을 보냈어요.';loadFriends()});
+  else if(st==='incoming'){B('거절',null,async()=>{const q=await SB.rpc('answer_friend',{p_from:x.user_id,p_accept:false});if(q.error)throw q.error;loadFriends();if(mode==='find'){x.relation='none';r.replaceWith(frRow(x,mode))}});
+    B('수락','pri',async()=>{const q=await SB.rpc('answer_friend',{p_from:x.user_id,p_accept:true});if(q.error)throw q.error;document.getElementById('frMsg').textContent=x.nickname+'님과 친구가 됐어요 🤝';loadFriends();if(mode==='find'){x.relation='friend';r.replaceWith(frRow(x,mode))}})}
+  else if(st==='outgoing'){if(mode==='find')B('요청 보냄','tag');else B('취소',null,async()=>{const q=await SB.rpc('remove_friend',{p_other:x.user_id});if(q.error)throw q.error;loadFriends()})}
+  else if(st==='friend'){if(mode==='find')B('친구예요','tag');else{B('📣',null,()=>cheerSheet({friend:true},x,'exhort')).setAttribute('aria-label','권면 보내기');B('❤️',null,()=>cheerSheet({friend:true},x,'love')).setAttribute('aria-label','형제사랑 보내기');
+    const more=B('⋯',null,null);more.setAttribute('aria-label','친구 끊기');let armed=false;more.addEventListener('click',async()=>{if(!armed){armed=true;more.textContent='끊기';more.setAttribute('aria-label','한 번 더 누르면 친구가 끊겨요');return}const q=await SB.rpc('remove_friend',{p_other:x.user_id});if(q.error){document.getElementById('frMsg').textContent=errMsg(q.error);return}loadFriends()})}}
+  r.append(a);return r}
+async function loadFriends(){if(!SB)return;const box=document.getElementById('frBox');if(!box)return;
+  try{if(!myFCode){const c=await SB.rpc('my_friend_code');if(!c.error&&c.data){myFCode=c.data;document.getElementById('frCode').textContent=c.data}}
+    const r=await SB.rpc('my_friends');if(r.error)throw r.error;frCache=r.data||[];box.innerHTML='';
+    const inc=frCache.filter(x=>x.status==='incoming'),fr=frCache.filter(x=>x.status==='friend'),out=frCache.filter(x=>x.status==='outgoing');
+    document.getElementById('frDot').hidden=!inc.length;
+    if(inc.length){box.append(el('h4',null,'📬 받은 친구 요청 '+inc.length));inc.forEach(x=>box.append(frRow(x,'list')))}
+    box.append(el('h4',null,'🤝 내 친구 '+fr.length+'명'));if(!fr.length)box.append(el('p','wnote','아직 친구가 없어요. 친구 코드를 나누거나 위에서 찾아보세요.'));
+    fr.sort((a,b)=>(b.last_read===today())-(a.last_read===today())||b.done_count-a.done_count).forEach(x=>box.append(frRow(x,'list')));
+    if(out.length){box.append(el('h4',null,'⏳ 보낸 요청'));out.forEach(x=>box.append(frRow(x,'list')))}}
+  catch(e){box.innerHTML='';box.append(el('p','wnote',errMsg(e)))}}
+async function doFriendCode(c){try{const r=await SB.rpc('request_friend_code',{p_code:c});setPendingFriend('');if(r.error)throw r.error;grpTab('fr');await loadFriends();
+    document.getElementById('frMsg').textContent=r.data==='friend'?'초대한 성도와 친구가 됐어요 🤝':'초대한 성도에게 친구 요청을 보냈어요. 수락하면 친구가 돼요.'}
+  catch(e){grpTab('fr');const m=document.getElementById('frMsg');if(m)m.textContent=/invalid_code/.test(e.message||'')?'친구 코드가 맞지 않아요.':errMsg(e)}}
 // --- 권면 · 형제사랑
 const CHEER={exhort:{label:'권면',icon:'📣',presets:['오늘 말씀 함께 읽어요! 🙏','조금 밀려도 괜찮아요. 오늘 한 장부터 다시 시작해요.','서로 돌아보아 사랑과 선행을 격려하며 (히 10:24) 함께 끝까지 가요!','말씀이 내 발에 등이요 내 길에 빛이니이다 (시 119:105). 오늘도 그 빛 따라 걸어요.']},
   love:{label:'형제사랑',icon:'❤️',presets:['함께 읽어서 힘이 나요 ❤️','꾸준히 읽는 모습이 큰 격려가 돼요!','오늘 당신을 위해 기도할게요 🙏','형제를 사랑하라 (요일 4:21). 함께여서 감사해요.']}};
@@ -1358,10 +1559,10 @@ function cheerSheet(g,m,kind){const C=CHEER[kind];const B=gpOpen();B.innerHTML='
   const ch=el('div','chips');let pick=C.presets[0];const ta=el('textarea');ta.maxLength=120;ta.rows=3;ta.placeholder='직접 쓰기 (120자까지)';ta.style.cssText='width:100%;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font:15px/1.6 var(--font);background:var(--card);color:var(--fg);resize:vertical';
   C.presets.forEach((t,k)=>{const b=el('button',null,t);b.type='button';b.setAttribute('aria-pressed',k===0);b.addEventListener('click',()=>{pick=t;ta.value='';ch.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b))});ch.append(b)});
   ta.addEventListener('input',()=>{if(ta.value.trim())ch.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'))});
-  const er=el('p','ferr');const bt=el('div','btns');const back=el('button','b2','뒤로');back.type='button';back.style.flex='1';back.addEventListener('click',()=>openGroup(g));
+  const er=el('p','ferr');const bt=el('div','btns');const back=el('button','b2',g.friend?'닫기':'뒤로');back.type='button';back.style.flex='1';back.addEventListener('click',()=>g.friend?gpClose():openGroup(g));
   const go=el('button','b2 pri','보내기');go.type='button';go.style.flex='2';
-  go.addEventListener('click',async()=>{const msg=(ta.value.trim()||pick).slice(0,120);go.disabled=true;try{const r=await SB.rpc('send_cheer',{p_group:g.id,p_to:m.user_id,p_kind:kind,p_msg:msg});if(r.error)throw r.error;
-      B.innerHTML='';B.append(el('h3',null,'보냈어요 '+C.icon),el('p','wnote',(m.nickname||'성도')+'님이 앱을 열면 받은 마음함에서 볼 수 있어요.'));const ok=el('button','b2 pri','모임으로 돌아가기');ok.type='button';ok.addEventListener('click',()=>openGroup(g));B.append(ok)}
+  go.addEventListener('click',async()=>{const msg=(ta.value.trim()||pick).slice(0,120);go.disabled=true;try{const r=await SB.rpc('send_cheer',{p_group:g.friend?null:g.id,p_to:m.user_id,p_kind:kind,p_msg:msg});if(r.error)throw r.error;
+      B.innerHTML='';B.append(el('h3',null,'보냈어요 '+C.icon),el('p','wnote',(m.nickname||'성도')+'님이 앱을 열면 받은 마음함에서 볼 수 있어요.'));const ok=el('button','b2 pri',g.friend?'닫기':'모임으로 돌아가기');ok.type='button';ok.addEventListener('click',()=>g.friend?gpClose():openGroup(g));B.append(ok)}
     catch(e){er.textContent=/too_many_cheers/.test(e.message||'')?'오늘은 더 보낼 수 없어요(하루 30개). 내일 다시 보내 주세요.':errMsg(e);go.disabled=false}});
   bt.append(back,go);B.append(el('p','wnote','고르거나 직접 써서 보내요.'),ch,ta,er,bt)}
 async function loadInbox(open){try{const r=await SB.rpc('my_cheers');if(r.error)throw r.error;const list=r.data||[];const un=list.filter(x=>!x.read_at).length;
@@ -1404,15 +1605,19 @@ document.getElementById('openSet').addEventListener('click',()=>{if(CUID&&SB)pus
 if(pushOK())navigator.serviceWorker.register('sw.js').catch(()=>{});
 async function cloudBoot(){if(!CUID)return;try{const sb=await loadSB();const s=await sb.auth.getSession();const u=s&&s.data&&s.data.session&&s.data.session.user;
     if(!u||u.id!==CUID){try{localStorage.removeItem('sb-'+SB_REF+'-auth-token')}catch(e){}location.reload();return}
-    groupsSetup();await cloudPull();loadGroups();
+    groupsSetup();await cloudPull();loadGroups();loadFriends();
     try{const u=new URL(location.href);if(u.searchParams.get('inbox')){u.searchParams.delete('inbox');history.replaceState(null,'',u.pathname+(u.search||''));loadInbox(true)}else loadInbox(false)}catch(e){loadInbox(false)}
     const p=await sb.from('profiles').select('nickname').eq('id',CUID).maybeSingle();
     if(p.data&&p.data.nickname){if(p.data.nickname!==ME.name)nickSet(p.data.nickname);afterNick()}else askNick(true);
-    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){cloudPull();if(!document.getElementById('gpDlg').open){loadGroups();loadInbox(false)}}})}
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){cloudPull();if(!document.getElementById('gpDlg').open){loadGroups();loadFriends();loadInbox(false)}}})}
   catch(e){document.getElementById('grpSec').hidden=false;grpMsg('서버에 연결하지 못했어요. 인터넷 연결을 확인해 주세요. 기록은 이 기기에 저장되고 있어요.')}}
 // 저장할 때마다 서버로 올리기
 {const _l=local,_m=mlocal,_h=hlocal;local=function(){_l();cloudTouch()};mlocal=function(){_m();cloudTouch()};hlocal=function(){_h();cloudTouch()}}
 if(GATED)cloudGateSetup();else if(CUID)cloudBoot();
+if(!CLOUD){(()=>{const sec=document.getElementById('grpSec');sec.hidden=false;sec.querySelectorAll('.cloudOnly').forEach(x=>x.hidden=true);
+  const note=t=>{const p=el('div','gcode');p.style.display='block';p.append(el('b',null,''),document.createTextNode(t));p.querySelector('b').remove();return p};
+  const L=document.getElementById('grpList');L.innerHTML='';L.append(note('모임 만들기·초대코드 참여는 웹 주소 버전(GitHub 주소)에서 카카오나 이메일로 로그인하면 쓸 수 있어요. 이 미리보기는 서버에 연결할 수 없어서 모임을 불러오지 못해요.'));
+  const P=document.getElementById('paneFr');P.innerHTML='';document.getElementById('panePr').append(note('중보기도나무도 웹 주소 버전에서 로그인하면 쓸 수 있어요. 기도 제목을 올리고, 기도 보내기와 응원 댓글로 서로 힘이 되어 줄 수 있어요.'));P.append(note('성도의 교제(친구 찾기·친구 맺기)도 웹 주소 버전에서 로그인하면 쓸 수 있어요. 친구 코드나 닉네임으로 찾아 친구를 맺고, 서로 진도를 보며 권면과 형제사랑을 보낼 수 있어요.'))})()}
 
 var IDX=[],BOOKS=[],BMAX={};
 function rebuildIdx(){if(!IDX)return;IDX.length=0;BOOKS.length=0;PCH.forEach((a,i)=>a.forEach(k=>{const[b,c]=k.split('|');if(!BOOKS.includes(b))BOOKS.push(b);IDX.push({b,f:+c,t:+c,i})}));CANON.forEach(b=>BMAX[b]=NCH[b]);
@@ -1423,7 +1628,7 @@ const ABBR={창:'창세기',출:'출애굽기',레:'레위기',민:'민수기',�
 const jo=w=>{const c=w.charCodeAt(w.length-1)-0xAC00;return c>=0&&c<11172&&c%28?'은':'는'};
 function matchBooks(q){if(ABBR[q])return[ABBR[q]];if(BOOKS.includes(q))return[q];
   let r=BOOKS.filter(b=>b.startsWith(q));if(!r.length)r=BOOKS.filter(b=>b.includes(q));return r}
-function goDay(i){if(typeof view!=='undefined'&&view!=='list')setView('list');const gi=parts.findIndex(g=>g.days.includes(i));if(gi<0)return;const det=document.getElementById('part-'+gi);det.open=true;
+function goDay(i){openSch('list');const gi=parts.findIndex(g=>g.days.includes(i));if(gi<0)return;const det=document.getElementById('part-'+gi);det.open=true;
   const row=document.querySelector('.row[data-i="'+i+'"]');if(!row)return;const cm=row.querySelector('.cm');if(cm)cm.open=true;
   row.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
   row.classList.add('flash');setTimeout(()=>row.classList.remove('flash'),2200)}
@@ -1479,7 +1684,7 @@ function find(){const inp=document.getElementById('fq'),msg=document.getElementB
     Object.keys(memos).forEach(markMemo);pushUp.forEach(k=>msave(k))}).catch(()=>{});
   href=db.collection('data/users/'+id).doc('habit');
   href.get().then(hs=>{if(hs.exists){const r=hs.data()||{};const lg=Object.assign({},r.log||{});Object.keys(H.log).forEach(k=>{if(!lg[k]||H.log[k]===1)lg[k]=H.log[k]});
-      const pushUp=Object.keys(H.log).some(k=>(r.log||{})[k]!==H.log[k]);H.log=lg;if(Number.isInteger(r.harvested)&&r.harvested>(H.harvested||0))H.harvested=r.harvested;if(typeof r.avatar==='string'&&r.avatar&&!H.avatar)H.avatar=r.avatar;const dd=Object.assign({},r.dd||{});Object.keys(H.dd).forEach(k=>{dd[k]=[...new Set([...(dd[k]||[]),...H.dd[k]])]});H.dd=dd;
+      const pushUp=Object.keys(H.log).some(k=>(r.log||{})[k]!==H.log[k]);H.log=lg;if(Number.isInteger(r.harvested)&&r.harvested>(H.harvested||0))H.harvested=r.harvested;if(typeof r.avatar==='string'&&r.avatar&&!H.avatar)H.avatar=r.avatar;H.spent=Math.max(H.spent||0,r.spent||0);H.bought=Math.max(H.bought||0,r.bought||0);if(Array.isArray(r.ledger)){const seen=new Set((H.ledger||[]).map(e=>e.t+e.k));H.ledger=(H.ledger||[]).concat(r.ledger.filter(e=>e&&!seen.has(e.t+e.k))).sort((a,b)=>a.t-b.t).slice(-300)}const dd=Object.assign({},r.dd||{});Object.keys(H.dd).forEach(k=>{dd[k]=[...new Set([...(dd[k]||[]),...H.dd[k]])]});H.dd=dd;
       if(r.set&&(hfresh||(r.set.at||0)>=(H.set.at||0)))H.set=Object.assign({start:H.set.start,wd:[1,1,1,1,1,1,1],off:[],at:0},r.set);else if(!r.set||(H.set.at||0)>(r.set.at||0))hsave();
       hlocal();if(H.set.plan&&planSig(H.set.plan)!==planSig(CURP))switchPlan(normPlan(H.set.plan));resched();hrender();if(pushUp)hsave()}else hsave()}).catch(()=>{});
   const snap=await ref.get();
